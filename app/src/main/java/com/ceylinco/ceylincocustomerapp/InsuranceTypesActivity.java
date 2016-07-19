@@ -31,5 +31,6 @@ public class InsuranceTypesActivity extends AppCompatActivity {
         abar.setDisplayShowTitleEnabled(false);
         abar.setDisplayHomeAsUpEnabled(true);
         abar.setHomeButtonEnabled(true);
+        //test
     }
 }
