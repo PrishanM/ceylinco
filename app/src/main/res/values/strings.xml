@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Ceylinco Customer App</string>
+
+    <string name="splash_message">MOTOR INSURANCE</string>
+
+    <!-- Select option screen -->
+    <string name="option_menu_message">Select an Option</string>
+    <string name="option_new_insurance">New insurance</string>
+    <string name="option_existing_policy">Existing policy</string>
+    <string name="option_inquiries">Inquiries</string>
+    <string name="option_screen_message_text">Comprehensive vehicle insurance cover from the market leader</string>
+
+    <!-- New Insurance - Vehicle List -->
+    <string name="new_insurance_vehicle_list_title">New Insurance - Vehicle List</string>
+    <string name="vehicle_car">Car</string>
+    <string name="vehicle_van">Van</string>
+    <string name="vehicle_bus">Bus</string>
+    <string name="vehicle_lorry">Lorry</string>
+    <string name="vehicle_bike">Bike</string>
+    <string name="vehicle_three_wheeler">Three Wheeler</string>
+    <string name="vehicle_jeep">Jeep</string>
+    <string name="vehicle_double_cab">Double cab</string>
+
+    <!-- Types of insurance -->
+    <string name="insurance_types_title">Types of Insurance</string>
+    <string name="payment_mode">Payment Mode</string>
+    <string name="comprehensive">Comprehensive</string>
+
+
+</resources>

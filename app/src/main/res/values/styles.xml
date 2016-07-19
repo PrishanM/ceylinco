@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
+
+    </style>
+
+    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">false</item>
+        <item name="windowActionBar">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@drawable/background</item>
+    </style>
+
+    <style name="BaseTextLarge" parent="@android:style/TextAppearance.Large">
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="BaseTextMedium" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="BaseTextSmall" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+</resources>
