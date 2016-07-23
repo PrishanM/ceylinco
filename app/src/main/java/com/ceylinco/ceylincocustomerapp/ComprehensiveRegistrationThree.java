@@ -1,25 +1,24 @@
 package com.ceylinco.ceylincocustomerapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
- * Created by Prishan Maduka on 7/19/2016.
+ * Created by Prishan Maduka on 7/23/2016.
  */
-public class InsuranceTypesActivity extends AppCompatActivity implements View.OnClickListener {
+public class ComprehensiveRegistrationThree extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView paymentMode,comprehensiveMode;
+    Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.insurance_types);
+        setContentView(R.layout.comprehensive_registration_three);
 
         final ActionBar abar = getSupportActionBar();
         View viewActionBar = getLayoutInflater().inflate(R.layout.action_bar_text, null);
@@ -28,7 +27,7 @@ public class InsuranceTypesActivity extends AppCompatActivity implements View.On
                 ActionBar.LayoutParams.MATCH_PARENT,
                 Gravity.CENTER);
         TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.mytext);
-        textviewTitle.setText(getResources().getString(R.string.insurance_types_title));
+        textviewTitle.setText(getResources().getString(R.string.registration_title));
         abar.setCustomView(viewActionBar, params);
         abar.setDisplayShowCustomEnabled(true);
         abar.setDisplayShowTitleEnabled(false);
@@ -40,23 +39,15 @@ public class InsuranceTypesActivity extends AppCompatActivity implements View.On
 
     private void initialize() {
 
-        paymentMode = (ImageView)findViewById(R.id.idPaymentMode);
-        comprehensiveMode = (ImageView)findViewById(R.id.idComprehensive);
+        btnLogin = (Button)findViewById(R.id.btnLogin);
 
-        paymentMode.setOnClickListener(this);
-        comprehensiveMode.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-
-        if(v.getId()== R.id.idPaymentMode){
-
-        }else if(v.getId()== R.id.idComprehensive){
-            Intent intent = new Intent(InsuranceTypesActivity.this,ComprehensiveRegistrationOne.class);
-            startActivity(intent);
+        if(v.getId()==R.id.btnLogin){
 
         }
-
     }
 }

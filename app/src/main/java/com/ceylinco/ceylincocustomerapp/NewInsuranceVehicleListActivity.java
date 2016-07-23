@@ -15,7 +15,7 @@ import android.widget.TextView;
  */
 public class NewInsuranceVehicleListActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView imgCar;
+    ImageView imgCar,imgVan,imgBus,imgLorry,imgBike,imgThreewheeler,imgJeep,imgDoubleCab;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,13 +41,48 @@ public class NewInsuranceVehicleListActivity extends AppCompatActivity implement
 
     private void initialize() {
         imgCar = (ImageView)findViewById(R.id.idCar);
+        imgVan = (ImageView)findViewById(R.id.idVan);
+        imgBus = (ImageView)findViewById(R.id.idBus);
+        imgLorry = (ImageView)findViewById(R.id.idLorry);
+        imgBike = (ImageView)findViewById(R.id.idBike);
+        imgThreewheeler = (ImageView)findViewById(R.id.idWheeler);
+        imgJeep = (ImageView)findViewById(R.id.idJeep);
+        imgDoubleCab = (ImageView)findViewById(R.id.idCab);
 
         imgCar.setOnClickListener(this);
+        imgVan.setOnClickListener(this);
+        imgBus.setOnClickListener(this);
+        imgLorry.setOnClickListener(this);
+        imgBike.setOnClickListener(this);
+        imgThreewheeler.setOnClickListener(this);
+        imgJeep.setOnClickListener(this);
+        imgDoubleCab.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.idCar){
+            Intent carInsurance = new Intent(NewInsuranceVehicleListActivity.this,InsuranceTypesActivity.class);
+            startActivity(carInsurance);
+        }else if(v.getId()==R.id.idVan){
+            Intent carInsurance = new Intent(NewInsuranceVehicleListActivity.this,InsuranceTypesActivity.class);
+            startActivity(carInsurance);
+        }else if(v.getId()==R.id.idBus){
+            Intent carInsurance = new Intent(NewInsuranceVehicleListActivity.this,InsuranceTypesActivity.class);
+            startActivity(carInsurance);
+        }else if(v.getId()==R.id.idLorry){
+            Intent carInsurance = new Intent(NewInsuranceVehicleListActivity.this,InsuranceTypesActivity.class);
+            startActivity(carInsurance);
+        }else if(v.getId()==R.id.idBike){
+            Intent carInsurance = new Intent(NewInsuranceVehicleListActivity.this,InsuranceTypesActivity.class);
+            startActivity(carInsurance);
+        }else if(v.getId()==R.id.idWheeler){
+            Intent carInsurance = new Intent(NewInsuranceVehicleListActivity.this,InsuranceTypesActivity.class);
+            startActivity(carInsurance);
+        }else if(v.getId()==R.id.idJeep){
+            Intent carInsurance = new Intent(NewInsuranceVehicleListActivity.this,InsuranceTypesActivity.class);
+            startActivity(carInsurance);
+        }else if(v.getId()==R.id.idCab){
             Intent carInsurance = new Intent(NewInsuranceVehicleListActivity.this,InsuranceTypesActivity.class);
             startActivity(carInsurance);
         }

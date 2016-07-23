@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Ceylinco Customer App</string>
-
     <string name="splash_message">MOTOR INSURANCE</string>
 
     <!-- Select option screen -->
@@ -9,6 +8,7 @@
     <string name="option_existing_policy">Existing policy</string>
     <string name="option_inquiries">Inquiries</string>
     <string name="option_screen_message_text">Comprehensive vehicle insurance cover from the market leader</string>
+    
 
     <!-- New Insurance - Vehicle List -->
     <string name="new_insurance_vehicle_list_title">New Insurance - Vehicle List</string>
@@ -20,11 +20,39 @@
     <string name="vehicle_three_wheeler">Three Wheeler</string>
     <string name="vehicle_jeep">Jeep</string>
     <string name="vehicle_double_cab">Double cab</string>
+    
 
     <!-- Types of insurance -->
     <string name="insurance_types_title">Types of Insurance</string>
     <string name="payment_mode">Payment Mode</string>
     <string name="comprehensive">Comprehensive</string>
+    
 
+    <!-- Registration - Payment mode & Comprehensive -->
+    <string name="registration_title">Registration</string>
+    <string name="select_registration_type">Select a Registration Type</string>
+    <string name="vehicle_number">Vehicle Number</string>
+    <string name="company_name">Name/Company Name</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="business_reg_no">ID/PP/Business Reg. No</string>
+    <string name="chassis_number">Chassis Number</string>
+    <string name="engine_number">Engine Number</string>
+    <string name="text_next">Next</string>
+    
+    <string name="value_of_vehicle">Value of Vehicle</string>
+    <string name="make">Make</string>
+    <string name="model">Model</string>
+    <string name="year_of_make">Year of Make</string>
+    <string name="leasing_company">Leasing Company</string>
+    <string name="purpose_of_user">Purpose of Use</string>
+    <string name="present_meter_reading">Present Meter Reading</string>
+
+    <string name="additional_covers">Additional Covers</string>
+    <string name="flood_cover">Flood cover and natural perils</string>
+    <string name="riot_cover">RIOT cover</string>
+    <string name="no_claim_bonus">No claim bonus</string>
+    <string name="log_in">Log In</string>
 
 </resources>

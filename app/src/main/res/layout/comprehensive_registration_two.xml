@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:layout_margin="@dimen/activity_horizontal_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/valOfVehicle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/AppEditText"
+            android:gravity="center_vertical"
+            android:hint="@string/value_of_vehicle"
+            android:textSize="16sp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/makeTextview"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.85"
+            style="@style/AppTextView"
+            android:gravity="center_vertical"
+            android:text="@string/make"
+            android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+        <ImageView
+            android:id="@+id/imgMake"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:background="@color/spinner_color"
+            android:padding="@dimen/standard_space"
+            android:src="@drawable/ic_down"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/modelTextview"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.85"
+            style="@style/AppTextView"
+            android:gravity="center_vertical"
+            android:text="@string/model"
+            android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+        <ImageView
+            android:id="@+id/imgModel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:background="@color/spinner_color"
+            android:padding="@dimen/standard_space"
+            android:src="@drawable/ic_down"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/yearTextview"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.85"
+            style="@style/AppTextView"
+            android:gravity="center_vertical"
+            android:text="@string/year_of_make"
+            android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+        <ImageView
+            android:id="@+id/imgYear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:background="@color/spinner_color"
+            android:padding="@dimen/standard_space"
+            android:src="@drawable/ic_down"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/leasingCompany"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/AppEditText"
+            android:gravity="center_vertical"
+            android:hint="@string/leasing_company"
+            android:textSize="16sp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/purpose_of_user"
+            android:textColor="@color/spinner_color"/>
+
+        <RadioGroup
+            android:id="@+id/radioUse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="0.6"
+            android:gravity="center_vertical"
+            android:weightSum="3">
+
+            <RadioButton
+                android:id="@+id/radioPrivate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Private"
+                android:textColor="@color/textColorPrimary"
+                android:layout_weight="1"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/radioHiring"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textColor="@color/textColorPrimary"
+                android:layout_height="wrap_content"
+                android:text="Hiring" />
+
+            <RadioButton
+                android:id="@+id/radioRent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textColor="@color/textColorPrimary"
+                android:layout_height="wrap_content"
+                android:text="Rent" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            android:textColor="@color/spinner_color"/>
+
+        <RadioGroup
+            android:id="@+id/radioType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="0.6"
+            android:gravity="center_vertical"
+            android:weightSum="2">
+
+            <RadioButton
+                android:id="@+id/radioBrandNew"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Brand New"
+                android:textColor="@color/textColorPrimary"
+                android:layout_weight="1"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/radioReCondition"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textColor="@color/textColorPrimary"
+                android:layout_height="wrap_content"
+                android:text="Re-Condition" />
+
+        </RadioGroup>
+
+
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/presentMeterReading"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/AppEditText"
+            android:gravity="center_vertical"
+            android:hint="@string/present_meter_reading"
+            android:textSize="16sp"
+            android:inputType="number"
+            android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space" />
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        style="@style/AppButton"
+        android:text="@string/text_next"/>
+
+
+
+
+
+</LinearLayout>

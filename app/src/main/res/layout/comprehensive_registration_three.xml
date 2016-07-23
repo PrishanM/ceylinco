@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:layout_margin="@dimen/activity_horizontal_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/additional_covers"
+            android:textColor="@color/spinner_color"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/standard_space" />
+
+        <CheckBox
+            android:id="@+id/checkBoxFlood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/flood_cover"
+            android:textColor="@color/textColorPrimary"/>
+
+        <CheckBox
+            android:id="@+id/checkBoxRiot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/riot_cover"
+            android:textColor="@color/textColorPrimary"/>
+
+        <CheckBox
+            android:id="@+id/checkBoxNoClaim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/no_claim_bonus"
+            android:textColor="@color/textColorPrimary"/>
+
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space" />
+
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        style="@style/AppButton"
+        android:text="@string/log_in"/>
+
+
+
+
+
+</LinearLayout>

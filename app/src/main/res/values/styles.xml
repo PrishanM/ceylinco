@@ -14,6 +14,7 @@
         <item name="android:windowBackground">@drawable/background</item>
     </style>
 
+    <!-- Text Appearance -->
     <style name="BaseTextLarge" parent="@android:style/TextAppearance.Large">
         <item name="android:textColor">@color/textColorPrimary</item>
     </style>
@@ -24,6 +25,28 @@
 
     <style name="BaseTextSmall" parent="@android:style/TextAppearance.Small">
         <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <!-- TextView Style -->
+    <style name="AppTextView" parent="android:Widget.TextView">
+        <item name="android:background">@drawable/cornered_textview</item>
+        <item name="android:textColor">@color/textHintColor</item>
+        <item name="android:textSize">@dimen/text_and_edit_text_sizes</item>
+    </style>
+
+    <!-- Edit Text common -->
+    <style name="AppEditText" parent="android:Widget.EditText">
+        <item name="android:background">@drawable/cornered_textview</item>
+        <item name="android:textColorHint">@color/textHintColor</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">@dimen/text_and_edit_text_sizes</item>
+    </style>
+
+    <!-- Button Common -->
+    <style name="AppButton" parent="android:Widget.Button">
+        <item name="android:background">@drawable/cornered_button</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:textSize">@dimen/button_text_sizes</item>
     </style>
 
 </resources>
