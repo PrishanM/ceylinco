@@ -80,6 +80,28 @@
 
         </activity>
 
+        <activity
+            android:name="com.ceylinco.ceylincocustomerapp.PaymentModeRegistrationOne"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ceylinco.ceylincocustomerapp.PaymentModeRegistrationOne" />
+
+        </activity>
+
+        <activity
+            android:name="com.ceylinco.ceylincocustomerapp.PaymentModeRegistrationTwo"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ceylinco.ceylincocustomerapp.PaymentModeRegistrationTwo" />
+
+        </activity>
+
     </application>
 
 </manifest>

@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -17,20 +16,16 @@ import java.util.Calendar;
 /**
  * Created by Prishan Maduka on 7/23/2016.
  */
-public class ComprehensiveRegistrationThree extends AppCompatActivity implements View.OnClickListener {
+public class PaymentModeRegistrationTwo extends AppCompatActivity implements View.OnClickListener {
 
     Button btnLogin;
-    ImageView imgFirstReg,imgPurchaseDate;
-    static TextView firstRegistration,purchaseDateTextView;
-    boolean isBrandNew = true;
-    LinearLayout layoutPurchaseDate,layoutFirstRegDate;
+    ImageView imgYearOfMake;
+    static TextView yearOfMake;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.comprehensive_registration_three);
-
-        isBrandNew = getIntent().getBooleanExtra("IS_BRAND_NEW",true);
+        setContentView(R.layout.payment_registration_two);
 
         final ActionBar abar = getSupportActionBar();
         View viewActionBar = getLayoutInflater().inflate(R.layout.action_bar_text, null);
@@ -50,55 +45,34 @@ public class ComprehensiveRegistrationThree extends AppCompatActivity implements
     }
 
     private void initialize() {
-        btnLogin = (Button)findViewById(R.id.btnLogin);
-        imgFirstReg = (ImageView)findViewById(R.id.imgFirstReg);
-        imgPurchaseDate = (ImageView)findViewById(R.id.imgPurchaseDate);
-        firstRegistration = (TextView)findViewById(R.id.firstRegistrationTextview);
-        purchaseDateTextView = (TextView)findViewById(R.id.purchaseDateTextview);
-        layoutPurchaseDate = (LinearLayout)findViewById(R.id.layoutPurchaseDate);
-        layoutFirstRegDate = (LinearLayout)findViewById(R.id.layoutFirstRegDate);
 
-        if (!isBrandNew){
-            layoutFirstRegDate.setVisibility(View.VISIBLE);
-            layoutPurchaseDate.setVisibility(View.VISIBLE);
-        }
+        btnLogin = (Button)findViewById(R.id.btnLogin);
+        imgYearOfMake = (ImageView)findViewById(R.id.imgYear);
+        yearOfMake = (TextView)findViewById(R.id.yearTextview);
 
         btnLogin.setOnClickListener(this);
-        imgFirstReg.setOnClickListener(this);
-        imgPurchaseDate.setOnClickListener(this);
-
+        imgYearOfMake.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.btnLogin){
 
-        }else if(v.getId()==R.id.imgFirstReg){
-            showDatePicker(false);
-        }else if(v.getId()==R.id.imgPurchaseDate){
-            showDatePicker(true);
+        }else if(v.getId()==R.id.imgYear){
+            showDatePicker();
         }
     }
 
-    DatePickerDialog.OnDateSetListener purchaseDateListener = new DatePickerDialog.OnDateSetListener() {
+    DatePickerDialog.OnDateSetListener makeYearListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-            purchaseDateTextView.setText(dayOfMonth+"/"+monthOfYear+"/"+year);
+            yearOfMake.setText(dayOfMonth+"/"+monthOfYear+"/"+year);
 
         }
     };
 
-    DatePickerDialog.OnDateSetListener regDateListener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            firstRegistration.setText(dayOfMonth+"/"+monthOfYear+"/"+year);
-
-        }
-    };
-
-    private void showDatePicker(boolean isPurchaseDate) {
+    private void showDatePicker() {
         DatePickerCustom date = new DatePickerCustom();
         /**
          * Set Up Current Date Into dialog
@@ -112,10 +86,8 @@ public class ComprehensiveRegistrationThree extends AppCompatActivity implements
         /**
          * Set Call back to capture selected date
          */
-        if(isPurchaseDate)
-            date.setCallBack(purchaseDateListener);
-        else
-            date.setCallBack(regDateListener);
+        date.setCallBack(makeYearListener);
         date.show(getSupportFragmentManager(), "Date Picker");
     }
+
 }

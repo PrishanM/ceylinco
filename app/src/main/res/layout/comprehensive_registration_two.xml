@@ -234,7 +234,8 @@
                 android:text="Brand New"
                 android:textColor="@color/textColorPrimary"
                 android:layout_weight="1"
-                android:checked="true" />
+                android:checked="true"
+                android:onClick="onRadioButtonClicked"/>
 
             <RadioButton
                 android:id="@+id/radioReCondition"
@@ -242,7 +243,8 @@
                 android:layout_weight="1"
                 android:textColor="@color/textColorPrimary"
                 android:layout_height="wrap_content"
-                android:text="Re-Condition" />
+                android:text="Re-Condition"
+                android:onClick="onRadioButtonClicked"/>
 
         </RadioGroup>
 
@@ -255,6 +257,7 @@
         android:layout_height="@dimen/standard_space" />
 
     <LinearLayout
+        android:id="@+id/meterReadingLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -271,6 +274,29 @@
             android:hint="@string/present_meter_reading"
             android:textSize="16sp"
             android:inputType="number"
+            android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/purchasePriceLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/purchasePrice"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/AppEditText"
+            android:gravity="center_vertical"
+            android:hint="@string/purchase_price"
+            android:textSize="16sp"
+            android:inputType="numberDecimal"
             android:paddingLeft="@dimen/activity_horizontal_margin"/>
 
     </LinearLayout>
