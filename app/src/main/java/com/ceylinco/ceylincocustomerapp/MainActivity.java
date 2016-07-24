@@ -48,6 +48,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(v.getId()==R.id.idNewInsurance){
             Intent newInsurance = new Intent(MainActivity.this,NewInsuranceVehicleListActivity.class);
             startActivity(newInsurance);
+        }else if(v.getId()==R.id.idExistingInsurance){
+            Intent existingInsurance = new Intent(MainActivity.this,ExistingPolicyActivity.class);
+            startActivity(existingInsurance);
+        }else if(v.getId()==R.id.idInquiries){
+            Intent inquiryInsurance = new Intent(MainActivity.this,InquiryActivity.class);
+            startActivity(inquiryInsurance);
         }
 
     }

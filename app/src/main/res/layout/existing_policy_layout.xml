@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:layout_margin="@dimen/activity_horizontal_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center">
+
+        <ImageView
+            android:src="@drawable/splash_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:background="@drawable/cornered_layout">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:padding="@dimen/standard_space"
+            android:src="@drawable/ic_user"/>
+
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.85"
+            android:gravity="center_vertical"
+            android:hint="@string/user_name"
+            android:textColorHint="@color/textColorPrimary"
+            android:textSize="16sp"
+            android:background="@android:color/transparent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:background="@drawable/cornered_layout">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:padding="@dimen/standard_space"
+            android:src="@drawable/ic_password"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.85"
+            android:gravity="center_vertical"
+            android:hint="@string/user_password"
+            android:textColorHint="@color/textColorPrimary"
+            android:textSize="16sp"
+            android:inputType="textPassword"
+            android:background="@android:color/transparent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        style="@style/AppButton"
+        android:text="@string/log_in"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/forgotPassword"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            style="@style/AppButton"
+            android:text="@string/forgot_password"/>
+
+        <Space
+            android:layout_width="@dimen/standard_space"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/registerNew"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            style="@style/AppButton"
+            android:text="@string/register"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>
