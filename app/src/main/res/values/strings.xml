@@ -80,4 +80,8 @@
     <string name="hospitals">Hospitals</string>
     <string name="banks">Banks</string>
 
+
+    <!-- Status of Claims -->
+    <string name="claims_status_title">Status List</string>
+
 </resources>

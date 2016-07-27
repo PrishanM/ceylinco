@@ -1,16 +1,20 @@
 package com.ceylinco.ceylincocustomerapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
  * Created by Prishan Maduka on 7/24/2016.
  */
-public class SelectedVehicleActivity extends AppCompatActivity {
+public class SelectedVehicleActivity extends AppCompatActivity implements View.OnClickListener {
+
+    ImageView statusOfClaims,policyDetails,vvipAccidents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +39,25 @@ public class SelectedVehicleActivity extends AppCompatActivity {
     }
 
     private void initialize() {
+
+        statusOfClaims = (ImageView)findViewById(R.id.idStatusOfClaims);
+        policyDetails = (ImageView)findViewById(R.id.idPolicyDetails);
+        vvipAccidents = (ImageView)findViewById(R.id.idVVIPAccidents);
+
+        statusOfClaims.setOnClickListener(this);
+        policyDetails.setOnClickListener(this);
+        vvipAccidents.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.idStatusOfClaims){
+            Intent claimsIntent = new Intent(SelectedVehicleActivity.this,StatusOfClaimsActivity.class);
+            startActivity(claimsIntent);
+        }else if(v.getId()==R.id.idPolicyDetails){
+
+        }else if(v.getId()==R.id.idVVIPAccidents){
+
+        }
     }
 }

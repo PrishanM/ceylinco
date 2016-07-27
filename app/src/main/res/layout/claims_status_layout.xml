@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:background="@color/list_view_odd_color">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/selectTextview"
+            android:layout_width="0dp"
+            android:singleLine="false"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="List of Accident Details | KE00121D00002291 | WPCAC0001"
+            android:textColor="@color/textColorPrimary"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space"/>
+
+    <ListView
+        android:id="@+id/claims_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9">
+
+    </ListView>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space"/>
+
+
+
+
+
+</LinearLayout>
