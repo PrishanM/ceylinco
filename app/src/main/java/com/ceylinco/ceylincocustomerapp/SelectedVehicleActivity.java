@@ -55,7 +55,8 @@ public class SelectedVehicleActivity extends AppCompatActivity implements View.O
             Intent claimsIntent = new Intent(SelectedVehicleActivity.this,StatusOfClaimsActivity.class);
             startActivity(claimsIntent);
         }else if(v.getId()==R.id.idPolicyDetails){
-
+            Intent policyDetailsIntent = new Intent(SelectedVehicleActivity.this,PolicyDetailsActivity.class);
+            startActivity(policyDetailsIntent);
         }else if(v.getId()==R.id.idVVIPAccidents){
 
         }

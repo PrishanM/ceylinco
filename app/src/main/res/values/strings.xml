@@ -83,5 +83,10 @@
 
     <!-- Status of Claims -->
     <string name="claims_status_title">Status List</string>
+    
+    
+    <!-- Policy Details -->
+    <string name="renew_policy">Please renew my policy</string>
+    <string name="contact_branch">For more details contact the branch 07754589652</string>
 
 </resources>
