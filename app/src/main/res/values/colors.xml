@@ -9,5 +9,6 @@
     <color name="list_view_odd_color">#46494a</color>
     <color name="list_view_even_color">#939596</color>
     <color name="pop_up_background_color">#e0e0e0</color>
+    <color name="selected_color">#59FFFFFF</color>
 
 </resources>

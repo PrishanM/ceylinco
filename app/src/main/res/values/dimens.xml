@@ -6,6 +6,7 @@
     <dimen name="activity_margin_extra_small">6dp</dimen>
 
     <dimen name="standard_space">10dp</dimen>
+    <dimen name="text_size_small">10sp</dimen>
     <dimen name="text_and_edit_text_sizes">16sp</dimen>
     <dimen name="button_text_sizes">18sp</dimen>
     <dimen name="button_text_size_small">14sp</dimen>
