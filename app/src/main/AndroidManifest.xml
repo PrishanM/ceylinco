@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:name="com.ceylinco.ceylincocustomerapp.util.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -31,151 +32,161 @@
         </activity>
 
         <activity
-            android:name="com.ceylinco.ceylincocustomerapp.NewInsuranceVehicleListActivity"
+            android:name=".newInsurances.NewInsuranceVehicleListActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ceylinco.ceylincocustomerapp.NewInsuranceVehicleListActivity" />
+                android:value=".newInsurances.NewInsuranceVehicleListActivity" />
 
         </activity>
 
         <activity
-            android:name="com.ceylinco.ceylincocustomerapp.InsuranceTypesActivity"
+            android:name=".newInsurances.InsuranceTypesActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ceylinco.ceylincocustomerapp.InsuranceTypesActivity" />
+                android:value=".newInsurances.InsuranceTypesActivity" />
 
         </activity>
 
         <activity
-            android:name="com.ceylinco.ceylincocustomerapp.ComprehensiveRegistrationOne"
+            android:name=".newInsurances.comprehensive.ComprehensiveRegistrationOne"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ceylinco.ceylincocustomerapp.ComprehensiveRegistrationOne" />
+                android:value=".newInsurances.comprehensive.ComprehensiveRegistrationOne" />
 
         </activity>
 
         <activity
-            android:name="com.ceylinco.ceylincocustomerapp.ComprehensiveRegistrationTwo"
+            android:name=".newInsurances.comprehensive.ComprehensiveRegistrationTwo"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ceylinco.ceylincocustomerapp.ComprehensiveRegistrationTwo" />
+                android:value=".newInsurances.comprehensive.ComprehensiveRegistrationTwo" />
 
         </activity>
 
         <activity
-            android:name="com.ceylinco.ceylincocustomerapp.ComprehensiveRegistrationThree"
+            android:name=".newInsurances.comprehensive.ComprehensiveRegistrationThree"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ceylinco.ceylincocustomerapp.ComprehensiveRegistrationThree" />
+                android:value=".newInsurances.comprehensive.ComprehensiveRegistrationThree" />
 
         </activity>
 
         <activity
-            android:name="com.ceylinco.ceylincocustomerapp.PaymentModeRegistrationOne"
+            android:name=".newInsurances.paymentMode.PaymentModeRegistrationOne"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ceylinco.ceylincocustomerapp.PaymentModeRegistrationOne" />
+                android:value=".newInsurances.paymentMode.PaymentModeRegistrationOne" />
 
         </activity>
 
         <activity
-            android:name="com.ceylinco.ceylincocustomerapp.PaymentModeRegistrationTwo"
+            android:name=".newInsurances.paymentMode.PaymentModeRegistrationTwo"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ceylinco.ceylincocustomerapp.PaymentModeRegistrationTwo" />
+                android:value=".newInsurances.paymentMode.PaymentModeRegistrationTwo" />
 
         </activity>
 
         <activity
-            android:name="com.ceylinco.ceylincocustomerapp.ExistingPolicyActivity"
+            android:name=".existingPolicy.ExistingPolicyActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ceylinco.ceylincocustomerapp.ExistingPolicyActivity" />
+                android:value=".existingPolicy.ExistingPolicyActivity" />
 
         </activity>
 
         <activity
-            android:name="com.ceylinco.ceylincocustomerapp.SelectVehicleActivity"
+            android:name=".existingPolicy.SelectVehicleActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ceylinco.ceylincocustomerapp.SelectVehicleActivity" />
+                android:value=".existingPolicy.SelectVehicleActivity" />
 
         </activity>
 
         <activity
-            android:name="com.ceylinco.ceylincocustomerapp.SelectedVehicleActivity"
+            android:name=".existingPolicy.SelectedVehicleActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ceylinco.ceylincocustomerapp.SelectedVehicleActivity" />
+                android:value=".existingPolicy.SelectedVehicleActivity" />
 
         </activity>
 
         <activity
-            android:name="com.ceylinco.ceylincocustomerapp.InquiryActivity"
+            android:name=".inquiries.InquiryActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ceylinco.ceylincocustomerapp.InquiryActivity" />
+                android:value=".inquiries.InquiryActivity" />
 
         </activity>
 
         <activity
-            android:name="com.ceylinco.ceylincocustomerapp.StatusOfClaimsActivity"
+            android:name=".existingPolicy.claims.StatusOfClaimsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ceylinco.ceylincocustomerapp.StatusOfClaimsActivity" />
+                android:value=".existingPolicy.claims.StatusOfClaimsActivity" />
 
         </activity>
 
         <activity
-            android:name="com.ceylinco.ceylincocustomerapp.PolicyDetailsActivity"
+            android:name=".existingPolicy.policyDetails.PolicyDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ceylinco.ceylincocustomerapp.PolicyDetailsActivity" />
+                android:value=".existingPolicy.policyDetails.PolicyDetailsActivity" />
 
         </activity>
 
+        <!-- Outstation -->
+        <!--<meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA2htYgeCvZxTMIQRwo_OrZl_mGKR0IKhw" />-->
+
+        <!-- Home -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA2htYgeCvZxTMIQRwo_OrZl_mGKR0IKhw" />
+            android:value="AIzaSyBO6Df3wBMy9ydmnZnikXdXGoei1GvF3io" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
     </application>
 
