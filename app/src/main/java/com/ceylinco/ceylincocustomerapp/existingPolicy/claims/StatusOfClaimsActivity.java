@@ -1,4 +1,4 @@
-package com.ceylinco.ceylincocustomerapp;
+package com.ceylinco.ceylincocustomerapp.existingPolicy.claims;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.ceylinco.ceylincocustomerapp.R;
 
 /**
  * Created by Prishan Maduka on 7/24/2016.

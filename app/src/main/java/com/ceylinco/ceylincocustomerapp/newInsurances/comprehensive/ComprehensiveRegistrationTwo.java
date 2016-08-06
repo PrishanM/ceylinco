@@ -1,4 +1,4 @@
-package com.ceylinco.ceylincocustomerapp;
+package com.ceylinco.ceylincocustomerapp.newInsurances.comprehensive;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import com.ceylinco.ceylincocustomerapp.R;
 
 import java.util.Calendar;
 

@@ -1,4 +1,4 @@
-package com.ceylinco.ceylincocustomerapp;
+package com.ceylinco.ceylincocustomerapp.newInsurances.comprehensive;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -9,23 +9,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.ceylinco.ceylincocustomerapp.util.DatePickerCustom;
+import com.ceylinco.ceylincocustomerapp.R;
 
 import java.util.Calendar;
 
 /**
  * Created by Prishan Maduka on 7/23/2016.
  */
-public class PaymentModeRegistrationTwo extends AppCompatActivity implements View.OnClickListener {
+public class ComprehensiveRegistrationThree extends AppCompatActivity implements View.OnClickListener {
 
     Button btnLogin;
-    ImageView imgYearOfMake;
-    static TextView yearOfMake;
+    ImageView imgFirstReg,imgPurchaseDate;
+    static TextView firstRegistration,purchaseDateTextView;
+    boolean isBrandNew = true;
+    LinearLayout layoutPurchaseDate,layoutFirstRegDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.payment_registration_two);
+        setContentView(R.layout.comprehensive_registration_three);
+
+        isBrandNew = getIntent().getBooleanExtra("IS_BRAND_NEW",true);
 
         final ActionBar abar = getSupportActionBar();
         View viewActionBar = getLayoutInflater().inflate(R.layout.action_bar_text, null);
@@ -45,34 +53,55 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
     }
 
     private void initialize() {
-
         btnLogin = (Button)findViewById(R.id.btnLogin);
-        imgYearOfMake = (ImageView)findViewById(R.id.imgYear);
-        yearOfMake = (TextView)findViewById(R.id.yearTextview);
+        imgFirstReg = (ImageView)findViewById(R.id.imgFirstReg);
+        imgPurchaseDate = (ImageView)findViewById(R.id.imgPurchaseDate);
+        firstRegistration = (TextView)findViewById(R.id.firstRegistrationTextview);
+        purchaseDateTextView = (TextView)findViewById(R.id.purchaseDateTextview);
+        layoutPurchaseDate = (LinearLayout)findViewById(R.id.layoutPurchaseDate);
+        layoutFirstRegDate = (LinearLayout)findViewById(R.id.layoutFirstRegDate);
+
+        if (!isBrandNew){
+            layoutFirstRegDate.setVisibility(View.VISIBLE);
+            layoutPurchaseDate.setVisibility(View.VISIBLE);
+        }
 
         btnLogin.setOnClickListener(this);
-        imgYearOfMake.setOnClickListener(this);
+        imgFirstReg.setOnClickListener(this);
+        imgPurchaseDate.setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.btnLogin){
 
-        }else if(v.getId()==R.id.imgYear){
-            showDatePicker();
+        }else if(v.getId()==R.id.imgFirstReg){
+            showDatePicker(false);
+        }else if(v.getId()==R.id.imgPurchaseDate){
+            showDatePicker(true);
         }
     }
 
-    DatePickerDialog.OnDateSetListener makeYearListener = new DatePickerDialog.OnDateSetListener() {
+    DatePickerDialog.OnDateSetListener purchaseDateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-            yearOfMake.setText(dayOfMonth+"/"+monthOfYear+"/"+year);
+            purchaseDateTextView.setText(dayOfMonth+"/"+monthOfYear+"/"+year);
 
         }
     };
 
-    private void showDatePicker() {
+    DatePickerDialog.OnDateSetListener regDateListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            firstRegistration.setText(dayOfMonth+"/"+monthOfYear+"/"+year);
+
+        }
+    };
+
+    private void showDatePicker(boolean isPurchaseDate) {
         DatePickerCustom date = new DatePickerCustom();
         /**
          * Set Up Current Date Into dialog
@@ -86,8 +115,10 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
         /**
          * Set Call back to capture selected date
          */
-        date.setCallBack(makeYearListener);
+        if(isPurchaseDate)
+            date.setCallBack(purchaseDateListener);
+        else
+            date.setCallBack(regDateListener);
         date.show(getSupportFragmentManager(), "Date Picker");
     }
-
 }

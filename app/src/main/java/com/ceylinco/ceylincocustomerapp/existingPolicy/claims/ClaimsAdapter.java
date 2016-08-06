@@ -1,4 +1,4 @@
-package com.ceylinco.ceylincocustomerapp;
+package com.ceylinco.ceylincocustomerapp.existingPolicy.claims;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+
+import com.ceylinco.ceylincocustomerapp.R;
 
 /**
  * @author Prishanm

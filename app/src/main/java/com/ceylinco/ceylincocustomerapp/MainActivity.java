@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ceylinco.ceylincocustomerapp.existingPolicy.ExistingPolicyActivity;
+import com.ceylinco.ceylincocustomerapp.inquiries.InquiryActivity;
+import com.ceylinco.ceylincocustomerapp.newInsurances.NewInsuranceVehicleListActivity;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView imgNew,imgExisting,imgInquiries;

@@ -1,4 +1,4 @@
-package com.ceylinco.ceylincocustomerapp;
+package com.ceylinco.ceylincocustomerapp.existingPolicy;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.ceylinco.ceylincocustomerapp.existingPolicy.policyDetails.PolicyDetailsActivity;
+import com.ceylinco.ceylincocustomerapp.R;
+import com.ceylinco.ceylincocustomerapp.existingPolicy.claims.StatusOfClaimsActivity;
 
 /**
  * Created by Prishan Maduka on 7/24/2016.

@@ -1,4 +1,4 @@
-package com.ceylinco.ceylincocustomerapp;
+package com.ceylinco.ceylincocustomerapp.existingPolicy.policyDetails;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -7,6 +7,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+
+import com.ceylinco.ceylincocustomerapp.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

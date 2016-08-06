@@ -1,4 +1,4 @@
-package com.ceylinco.ceylincocustomerapp;
+package com.ceylinco.ceylincocustomerapp.util;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

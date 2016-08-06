@@ -1,4 +1,4 @@
-package com.ceylinco.ceylincocustomerapp;
+package com.ceylinco.ceylincocustomerapp.newInsurances.paymentMode;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,17 +9,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.ceylinco.ceylincocustomerapp.R;
+
 /**
- * Created by Prishan Maduka on 7/24/2016.
+ * Created by Prishan Maduka on 7/23/2016.
  */
-public class SelectVehicleActivity extends AppCompatActivity implements View.OnClickListener {
+public class PaymentModeRegistrationOne extends AppCompatActivity implements View.OnClickListener{
 
     Button btnNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.select_vehicle_layout);
+        setContentView(R.layout.comprehensive_registration_one);
 
         final ActionBar abar = getSupportActionBar();
         View viewActionBar = getLayoutInflater().inflate(R.layout.action_bar_text, null);
@@ -28,7 +30,7 @@ public class SelectVehicleActivity extends AppCompatActivity implements View.OnC
                 ActionBar.LayoutParams.MATCH_PARENT,
                 Gravity.CENTER);
         TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.mytext);
-        textviewTitle.setText(getResources().getString(R.string.select_vehicle_title));
+        textviewTitle.setText(getResources().getString(R.string.registration_title));
         abar.setCustomView(viewActionBar, params);
         abar.setDisplayShowCustomEnabled(true);
         abar.setDisplayShowTitleEnabled(false);
@@ -39,6 +41,7 @@ public class SelectVehicleActivity extends AppCompatActivity implements View.OnC
     }
 
     private void initialize() {
+
         btnNext = (Button)findViewById(R.id.btnNext);
 
         btnNext.setOnClickListener(this);
@@ -47,9 +50,8 @@ public class SelectVehicleActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.btnNext){
-            Intent intent = new Intent(SelectVehicleActivity.this,SelectedVehicleActivity.class);
+            Intent intent = new Intent(PaymentModeRegistrationOne.this,PaymentModeRegistrationTwo.class);
             startActivity(intent);
-
         }
     }
 }

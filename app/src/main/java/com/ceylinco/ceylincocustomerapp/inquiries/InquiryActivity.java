@@ -1,4 +1,4 @@
-package com.ceylinco.ceylincocustomerapp;
+package com.ceylinco.ceylincocustomerapp.inquiries;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.ceylinco.ceylincocustomerapp.inquiries.locationServices.LocationServices;
+import com.ceylinco.ceylincocustomerapp.R;
 
 /**
  * Created by Prishan Maduka on 7/24/2016.
