@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ceylinco.ceylincocustomerapp.existingPolicy.accidents.ReportAccidentsActivity;
 import com.ceylinco.ceylincocustomerapp.existingPolicy.policyDetails.PolicyDetailsActivity;
 import com.ceylinco.ceylincocustomerapp.R;
 import com.ceylinco.ceylincocustomerapp.existingPolicy.claims.StatusOfClaimsActivity;
@@ -62,7 +63,8 @@ public class SelectedVehicleActivity extends AppCompatActivity implements View.O
             Intent policyDetailsIntent = new Intent(SelectedVehicleActivity.this,PolicyDetailsActivity.class);
             startActivity(policyDetailsIntent);
         }else if(v.getId()==R.id.idVVIPAccidents){
-
+            Intent accidentsIntent = new Intent(SelectedVehicleActivity.this,ReportAccidentsActivity.class);
+            startActivity(accidentsIntent);
         }
     }
 }

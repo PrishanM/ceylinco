@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class SplashActivity extends Activity {
     private static int SPLASH_TIMEOUT_TIME = 3000;
-    private int cameraState = 0,locationServicesState=0,locationCoarseState=0;
+    private int cameraState = 0,locationServicesState=0,locationCoarseState=0,storageState=0;
     private static int REQUEST_CODE = 1100;
     List<String> permissionList = new ArrayList<String>();
 
@@ -32,6 +32,7 @@ public class SplashActivity extends Activity {
             cameraState = checkSelfPermission(Manifest.permission.CAMERA); // Permission to capture images
             locationServicesState = checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION); // Permission for location services
             locationCoarseState = checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION); // Permission for location services
+            storageState = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
             if(cameraState!= PackageManager.PERMISSION_GRANTED){
                 permissionList.add(Manifest.permission.CAMERA);
@@ -41,6 +42,9 @@ public class SplashActivity extends Activity {
             }
             if(locationCoarseState!=PackageManager.PERMISSION_GRANTED){
                 permissionList.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+            }
+            if(storageState!=PackageManager.PERMISSION_GRANTED){
+                permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
             }
 
             if (permissionList.size()>0){

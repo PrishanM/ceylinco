@@ -10,9 +10,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.TextView;
 
 import com.ceylinco.ceylincocustomerapp.R;
 import com.ceylinco.ceylincocustomerapp.models.LocationModel;
@@ -55,6 +58,22 @@ public class ValueAddedServicesActivity extends AppCompatActivity implements OnM
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.branches_layout);
+
+        final ActionBar abar = getSupportActionBar();
+        View viewActionBar = getLayoutInflater().inflate(R.layout.action_bar_text, null);
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(//Center the textview in the ActionBar !
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+        TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.mytext);
+        textviewTitle.setText(getResources().getString(R.string.location_services));
+        abar.setCustomView(viewActionBar, params);
+        abar.setDisplayShowCustomEnabled(true);
+        abar.setDisplayShowTitleEnabled(false);
+        abar.setDisplayHomeAsUpEnabled(true);
+        abar.setHomeButtonEnabled(true);
+
+
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         loadingSpinner = (View)findViewById(R.id.loadingSpinnerProducts);
         mapFragment.getMapAsync(this);

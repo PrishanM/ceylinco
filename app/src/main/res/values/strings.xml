@@ -90,6 +90,9 @@
     <string name="hotline">Hotline</string>
     <string name="head_office">Head Office</string>
     <string name="vip_center">VIP Center</string>
+    <string name="add_new_photo">Add new photo</string>
+    <string name="upload_photo">Upload</string>
+    <string name="report_accident">Report an accident</string>
 
 
     <!-- Status of Claims -->
