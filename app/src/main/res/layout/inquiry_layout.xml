@@ -14,13 +14,13 @@
         android:gravity="center">
 
         <LinearLayout
+            android:id="@+id/idPoliceStations"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.8"
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/idPoliceStations"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/police_stations"/>
@@ -51,13 +51,13 @@
         android:gravity="center">
 
         <LinearLayout
+            android:id="@+id/idHospitals"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.8"
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/idHospitals"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/hospitals"/>
@@ -86,13 +86,13 @@
         android:gravity="center">
 
         <LinearLayout
+            android:id="@+id/idBanks"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.8"
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/idBanks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/banks"/>

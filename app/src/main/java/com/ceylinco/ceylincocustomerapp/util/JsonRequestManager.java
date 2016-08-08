@@ -1,7 +1,6 @@
 package com.ceylinco.ceylincocustomerapp.util;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -10,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.ceylinco.ceylincocustomerapp.models.LocationModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONObject;
@@ -55,30 +55,28 @@ public class JsonRequestManager {
 
 	/* Volley */
 
-	public static interface getSingleProductRequest {
-		void onSuccess(String s);
+	public static interface getLocationDetailsRequest {
+		void onSuccess(LocationModel s);
 
 		void onError(String status);
 	}
 
-	public void getSingleProducts(String url,
-								  final getSingleProductRequest callback) {
+	public void getLocationDetails(String url,
+								   final getLocationDetailsRequest callback) {
 
 
 		String fullUrl = url;
-
 		JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, fullUrl, null,
 				new Response.Listener<JSONObject>() {
 					@Override
 					public void onResponse(JSONObject response) {
 						ObjectMapper mapper = new ObjectMapper();
 						try {
-							Log.d("xxxx", response.toString());
-
-							callback.onSuccess(response.toString());
+							LocationModel locationModel = mapper.readValue(response.toString(), LocationModel.class);
+							callback.onSuccess(locationModel);
 							mapper = null;
 						} catch (Exception e) {
-							callback.onError(e.getLocalizedMessage());
+							callback.onError("Error occurred");
 						}
 					}
 				}, new Response.ErrorListener() {

@@ -5,6 +5,7 @@
     <string name="location_permission_denied">This requires location permission to enable your location services..</string>
     <string name="permission_required_toast">Location permission is required.</string>
     <string name="permission_rationale_location">Access to the location services is required.</string>
+    <string name="server_key">AIzaSyDg4rLfyJixYZtraMENA4wCzDYzpWFOCPw</string>
 
     <!-- Select option screen -->
     <string name="option_menu_message">Select an Option</string>

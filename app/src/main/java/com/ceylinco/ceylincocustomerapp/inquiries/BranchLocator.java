@@ -1,6 +1,7 @@
 package com.ceylinco.ceylincocustomerapp.inquiries;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -15,7 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ceylinco.ceylincocustomerapp.R;
-import com.ceylinco.ceylincocustomerapp.util.JsonRequestManager;
+import com.ceylinco.ceylincocustomerapp.util.DetectNetwork;
+import com.ceylinco.ceylincocustomerapp.util.Notifications;
 import com.ceylinco.ceylincocustomerapp.util.PermissionUtils;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,12 +41,32 @@ public class BranchLocator extends Fragment implements OnMapReadyCallback {
     private double currentLatitude,currentLongitude;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private boolean mPermissionDenied = false;
+    private Notifications notifications;
+    private AlertDialog alertDialog;
+    private Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.branches_layout, container, false);
         mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        notifications = new Notifications();
+        context = getActivity();
+
+        DetectNetwork.setmContext(getActivity());
+
+        //Check network connectivity
+        if(!DetectNetwork.isConnected()){
+            alertDialog = notifications.showNetworkNotification(getActivity());
+            alertDialog.show();
+        }
+
+        if(!DetectNetwork.isLocationEnabled(getActivity())){
+            alertDialog = notifications.showGPSDisabledNotification(context);
+            alertDialog.show();
+        }
+
+
         return rootView;
     }
 
@@ -86,7 +108,6 @@ public class BranchLocator extends Fragment implements OnMapReadyCallback {
                     .newCameraPosition(cameraPosition));
 
             map.addMarker(marker);
-            getProducts();
         }
     }
 
@@ -116,21 +137,4 @@ public class BranchLocator extends Fragment implements OnMapReadyCallback {
             mPermissionDenied = false;
         }
     }
-
-    private void getProducts() {
-        JsonRequestManager.getInstance(getActivity()).getSingleProducts("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+currentLatitude+","+currentLongitude+"&radius=5000&types=bank&sensor=true&key=AIzaSyDg4rLfyJixYZtraMENA4wCzDYzpWFOCPw",callback);
-    }
-
-    JsonRequestManager.getSingleProductRequest callback = new JsonRequestManager.getSingleProductRequest(){
-
-        @Override
-        public void onSuccess(String s) {
-
-        }
-
-        @Override
-        public void onError(String status) {
-
-        }
-    };
 }

@@ -1,5 +1,7 @@
 package com.ceylinco.ceylincocustomerapp.inquiries;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -40,17 +42,19 @@ public class CallUsFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
         if(v.getId()==R.id.idHotLine){
-            callUs("011256895");
+            callUs("tel:011256895");
         }else if(v.getId()==R.id.idHeadOffice){
-            callUs("011256895");
+            callUs("tel:011289632");
         }else if(v.getId()==R.id.idVIP){
-            callUs("0112897653");
+            callUs("tel:0112897653");
         }
 
     }
 
     private void callUs(String number){
-
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse(number));
+        startActivity(callIntent);
     }
 
 
