@@ -40,7 +40,6 @@ public class ClaimsAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = null;
-        final int posi = position;
 
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) con
