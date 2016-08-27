@@ -22,7 +22,7 @@ public class DownloaderTask extends AsyncTask<String, Void, Bitmap> {
     private final WeakReference<ImageView> imageViewReference;
 
     public DownloaderTask(ImageView imageView) {
-        imageViewReference = new WeakReference<ImageView>(imageView);
+        imageViewReference = new WeakReference<>(imageView);
     }
 
     @Override

@@ -36,26 +36,22 @@ import java.util.List;
 public class BranchLocator extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap map;
-    private SupportMapFragment mapFragment;
-    private View rootView;
     private double currentLatitude,currentLongitude;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private boolean mPermissionDenied = false;
-    private Notifications notifications;
-    private AlertDialog alertDialog;
-    private Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.branches_layout, container, false);
-        mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        View rootView = inflater.inflate(R.layout.branches_layout, container, false);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        notifications = new Notifications();
-        context = getActivity();
+        Notifications notifications = new Notifications();
+        Context context = getActivity();
 
         DetectNetwork.setmContext(getActivity());
 
         //Check network connectivity
+        AlertDialog alertDialog;
         if(!DetectNetwork.isConnected()){
             alertDialog = notifications.showNetworkNotification(getActivity());
             alertDialog.show();

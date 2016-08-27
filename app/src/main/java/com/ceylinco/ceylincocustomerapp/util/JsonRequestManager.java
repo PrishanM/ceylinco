@@ -55,7 +55,7 @@ public class JsonRequestManager {
 
 	/* Volley */
 
-	public static interface getLocationDetailsRequest {
+	public interface getLocationDetailsRequest {
 		void onSuccess(LocationModel s);
 
 		void onError(String status);
@@ -65,8 +65,7 @@ public class JsonRequestManager {
 								   final getLocationDetailsRequest callback) {
 
 
-		String fullUrl = url;
-		JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, fullUrl, null,
+		JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
 					@Override
 					public void onResponse(JSONObject response) {

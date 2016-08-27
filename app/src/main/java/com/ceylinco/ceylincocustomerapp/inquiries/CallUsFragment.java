@@ -17,7 +17,6 @@ import com.ceylinco.ceylincocustomerapp.R;
 public class CallUsFragment extends Fragment implements View.OnClickListener {
 
     private View rootView;
-    private LinearLayout hotLine,headOffice,vipCenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
@@ -29,9 +28,9 @@ public class CallUsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initialize() {
-        hotLine = (LinearLayout)rootView.findViewById(R.id.idHotLine);
-        headOffice = (LinearLayout)rootView.findViewById(R.id.idHeadOffice);
-        vipCenter = (LinearLayout)rootView.findViewById(R.id.idVIP);
+        LinearLayout hotLine = (LinearLayout) rootView.findViewById(R.id.idHotLine);
+        LinearLayout headOffice = (LinearLayout) rootView.findViewById(R.id.idHeadOffice);
+        LinearLayout vipCenter = (LinearLayout) rootView.findViewById(R.id.idVIP);
 
         hotLine.setOnClickListener(this);
         headOffice.setOnClickListener(this);

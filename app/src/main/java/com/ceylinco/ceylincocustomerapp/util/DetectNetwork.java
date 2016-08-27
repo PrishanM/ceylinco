@@ -24,11 +24,7 @@ public class DetectNetwork {
 	
 	public static boolean isConnected(){
         ConnectivityManager conManager = (ConnectivityManager) getmContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-		if(conManager.getActiveNetworkInfo()!=null && conManager.getActiveNetworkInfo().isAvailable() && conManager.getActiveNetworkInfo().isConnected()){
-			return true;
-		}else{
-			return false;
-		}
+		return conManager.getActiveNetworkInfo() != null && conManager.getActiveNetworkInfo().isAvailable() && conManager.getActiveNetworkInfo().isConnected();
     }
 
 	public static boolean isLocationEnabled(Context context) {

@@ -26,9 +26,8 @@ public class Notifications {
 
             }
         });
-        AlertDialog dialog = builder.create();
 
-        return dialog;
+        return builder.create();
     }
 
     //Http request-response  error dialog
@@ -40,9 +39,8 @@ public class Notifications {
 
             }
         });
-        AlertDialog dialog = builder.create();
 
-        return dialog;
+        return builder.create();
     }
 
     //No network error dialog
@@ -66,8 +64,7 @@ public class Notifications {
 
             }
         });
-        AlertDialog dialog = builder.create();
 
-        return dialog;
+        return builder.create();
     }
 }
