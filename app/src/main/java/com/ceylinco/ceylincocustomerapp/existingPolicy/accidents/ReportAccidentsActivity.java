@@ -1,19 +1,21 @@
 package com.ceylinco.ceylincocustomerapp.existingPolicy.accidents;
 
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import com.ceylinco.ceylincocustomerapp.R;
@@ -31,18 +33,20 @@ import java.util.Locale;
 public class ReportAccidentsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button addNewPhoto,uploadPhotos;
-    private GridView gridView;
-    private ImageGalleryAdpater adapter;
+    private RecyclerView recyclerView;
     private ArrayList<ImageDetails> imageDetailses = new ArrayList<>();
     private static final int CAMERA_REQUEST = 2000;
     private static final String IMAGE_DIRECTORY_NAME = "ceylinco";
     private Uri fileUri;
+    private Context con;
+    private StaggeredGridLayoutManager staggeredGridLayoutManager;
+    private ImageGalleryRecycleAdapter imageGalleryRecycleAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.image_gallery);
-
+        setContentView(R.layout.images_view);
         final ActionBar abar = getSupportActionBar();
         View viewActionBar = getLayoutInflater().inflate(R.layout.action_bar_text, null);
         ActionBar.LayoutParams params = new ActionBar.LayoutParams(//Center the textview in the ActionBar !
@@ -63,13 +67,32 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
     private void initialize() {
         addNewPhoto = (Button)findViewById(R.id.addNewPhoto);
         uploadPhotos = (Button)findViewById(R.id.upload);
-        gridView = (GridView)findViewById(R.id.imgGallery);
-        adapter = new ImageGalleryAdpater(this,imageDetailses);
-
+        recyclerView = (RecyclerView)findViewById(R.id.imgGallery) ;
+        recyclerView.setHasFixedSize(true);
+        staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, 1);
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+        imageGalleryRecycleAdapter = new ImageGalleryRecycleAdapter(this,imageDetailses);
+        recyclerView.setAdapter(imageGalleryRecycleAdapter);
+        con = this;
         addNewPhoto.setOnClickListener(this);
         uploadPhotos.setOnClickListener(this);
 
-        gridView.setAdapter(adapter);
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Log.d("TAG","ON CLICK");
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                if(imageDetailses.get(position).isChecked()){
+                    imageDetailses.get(position).setChecked(false);
+                }else{
+                    imageDetailses.get(position).setChecked(true);
+                }
+                imageGalleryRecycleAdapter.notifyDataSetChanged();
+            }
+        }));
 
     }
 
@@ -88,16 +111,11 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
             ImageDetails imageDetails = new ImageDetails();
 
             try {
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = 8;
-                final Bitmap photo = BitmapFactory.decodeFile(fileUri.getPath(),
-                        options);
-                //pathList.add(fileUri.getPath());
                 imageDetails.setImagePath(fileUri.getPath());
                 imageDetails.setChecked(true);
 
                 imageDetailses.add(imageDetails);
-                adapter.notifyDataSetChanged();
+                imageGalleryRecycleAdapter.notifyDataSetChanged();
 
             }catch (NullPointerException e){
                 e.printStackTrace();
@@ -154,5 +172,55 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
         }
 
         return mediaFile;
+    }
+
+    //ClickListener interface for images recycle view
+    public interface ClickListener {
+        void onClick(View view, int position);
+
+        void onLongClick(View view,int position);
+    }
+
+    public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+
+        private GestureDetector gestureDetector;
+        private ReportAccidentsActivity.ClickListener clickListener;
+
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ReportAccidentsActivity.ClickListener clickListener) {
+            this.clickListener = clickListener;
+            gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+                    View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
+                    if (child != null && clickListener != null) {
+                        clickListener.onLongClick(child, recyclerView.getChildPosition(child));
+                    }
+                }
+            });
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
+                //clickListener.onLongClick(child, rv.getChildPosition(child));
+            }
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+        }
     }
 }
