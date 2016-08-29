@@ -28,7 +28,6 @@ public class JsonRequestManager {
 	 * Log or request TAG
 	 */
 	public static final String TAG = "VolleyInstance";
-	private String tag_json_arry = "json_array_req";
 
 	/* Volley */
 	public static synchronized JsonRequestManager getInstance(Context context) {
@@ -73,7 +72,6 @@ public class JsonRequestManager {
 						try {
 							LocationModel locationModel = mapper.readValue(response.toString(), LocationModel.class);
 							callback.onSuccess(locationModel);
-							mapper = null;
 						} catch (Exception e) {
 							callback.onError("Error occurred");
 						}
@@ -92,6 +90,7 @@ public class JsonRequestManager {
 				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
 		// Adding request to request queue
+		String tag_json_arry = "json_array_req";
 		AppController.getInstance().addToRequestQueue(req,
 				tag_json_arry);
 

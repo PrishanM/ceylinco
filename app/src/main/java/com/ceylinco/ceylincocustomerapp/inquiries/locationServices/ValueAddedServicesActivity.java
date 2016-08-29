@@ -42,12 +42,9 @@ import java.util.List;
 public class ValueAddedServicesActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap map;
-    private SupportMapFragment mapFragment;
     private double currentLatitude,currentLongitude;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private boolean mPermissionDenied = false;
-    private Notifications notifications;
-    private AlertDialog alertDialog;
     private Context context;
     private String type;
     private View loadingSpinner;
@@ -74,10 +71,10 @@ public class ValueAddedServicesActivity extends AppCompatActivity implements OnM
         abar.setHomeButtonEnabled(true);
 
 
-        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        loadingSpinner = (View)findViewById(R.id.loadingSpinnerProducts);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        loadingSpinner = findViewById(R.id.loadingSpinnerProducts);
         mapFragment.getMapAsync(this);
-        notifications = new Notifications();
+        Notifications notifications = new Notifications();
         context = this;
 
         type = getIntent().getStringExtra("TYPE");
@@ -85,12 +82,13 @@ public class ValueAddedServicesActivity extends AppCompatActivity implements OnM
         DetectNetwork.setmContext(context);
 
         //Check network connectivity
+        AlertDialog alertDialog;
         if(!DetectNetwork.isConnected()){
             alertDialog = notifications.showNetworkNotification(context);
             alertDialog.show();
         }
 
-        if(!DetectNetwork.isLocationEnabled(context)){
+        if(DetectNetwork.isLocationEnabled(context)){
             alertDialog = notifications.showGPSDisabledNotification(context);
             alertDialog.show();
         }
@@ -106,13 +104,13 @@ public class ValueAddedServicesActivity extends AppCompatActivity implements OnM
 
     private void enableLocation(){
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            PermissionUtils.requestPermission(ValueAddedServicesActivity.this, LOCATION_PERMISSION_REQUEST_CODE,
-                    Manifest.permission.ACCESS_FINE_LOCATION, true);
+            PermissionUtils.requestPermission(ValueAddedServicesActivity.this, LOCATION_PERMISSION_REQUEST_CODE
+            );
         }else if (map != null) {
             map.setMyLocationEnabled(true);
             LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
             List<String> providers = lm.getProviders(true);
-            Location l = null;
+            Location l;
 
             for (int i = 0; i < providers.size(); i++) {
                 l = lm.getLastKnownLocation(providers.get(i));
@@ -143,8 +141,8 @@ public class ValueAddedServicesActivity extends AppCompatActivity implements OnM
             return;
         }
 
-        if (PermissionUtils.isPermissionGranted(permissions, grantResults,
-                Manifest.permission.ACCESS_FINE_LOCATION)) {
+        if (PermissionUtils.isPermissionGranted(permissions, grantResults
+        )) {
             // Enable the my location layer if the permission has been granted.
             enableLocation();
         } else {
@@ -159,7 +157,7 @@ public class ValueAddedServicesActivity extends AppCompatActivity implements OnM
         if (mPermissionDenied) {
             // Permission was not granted, display error dialog.
             PermissionUtils.PermissionDeniedDialog
-                    .newInstance(true).show(getSupportFragmentManager(), "dialog");
+                    .newInstance().show(getSupportFragmentManager(), "dialog");
             mPermissionDenied = false;
         }
     }

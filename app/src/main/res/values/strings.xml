@@ -29,7 +29,7 @@
 
     <!-- Types of insurance -->
     <string name="insurance_types_title">Types of Insurance</string>
-    <string name="payment_mode">Payment Mode</string>
+    <string name="payment_mode">Third Party</string>
     <string name="comprehensive">Comprehensive</string>
     
 

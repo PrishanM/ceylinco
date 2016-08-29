@@ -57,7 +57,7 @@ public class BranchLocator extends Fragment implements OnMapReadyCallback {
             alertDialog.show();
         }
 
-        if(!DetectNetwork.isLocationEnabled(getActivity())){
+        if(DetectNetwork.isLocationEnabled(getActivity())){
             alertDialog = notifications.showGPSDisabledNotification(context);
             alertDialog.show();
         }
@@ -76,13 +76,13 @@ public class BranchLocator extends Fragment implements OnMapReadyCallback {
 
     private void enableLocation(){
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            PermissionUtils.requestPermission((AppCompatActivity)getActivity(), LOCATION_PERMISSION_REQUEST_CODE,
-                    Manifest.permission.ACCESS_FINE_LOCATION, true);
+            PermissionUtils.requestPermission((AppCompatActivity)getActivity(), LOCATION_PERMISSION_REQUEST_CODE
+            );
         }else if (map != null) {
             map.setMyLocationEnabled(true);
             LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
             List<String> providers = lm.getProviders(true);
-            Location l = null;
+            Location l;
 
             for (int i = 0; i < providers.size(); i++) {
                 l = lm.getLastKnownLocation(providers.get(i));
@@ -113,8 +113,8 @@ public class BranchLocator extends Fragment implements OnMapReadyCallback {
             return;
         }
 
-        if (PermissionUtils.isPermissionGranted(permissions, grantResults,
-                Manifest.permission.ACCESS_FINE_LOCATION)) {
+        if (PermissionUtils.isPermissionGranted(permissions, grantResults
+        )) {
             // Enable the my location layer if the permission has been granted.
             enableLocation();
         } else {
@@ -129,7 +129,7 @@ public class BranchLocator extends Fragment implements OnMapReadyCallback {
         if (mPermissionDenied) {
             // Permission was not granted, display error dialog.
             PermissionUtils.PermissionDeniedDialog
-                    .newInstance(true).show(getChildFragmentManager(), "dialog");
+                    .newInstance().show(getChildFragmentManager(), "dialog");
             mPermissionDenied = false;
         }
     }

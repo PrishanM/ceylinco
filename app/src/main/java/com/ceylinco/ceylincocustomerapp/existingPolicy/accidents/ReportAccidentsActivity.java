@@ -32,14 +32,10 @@ import java.util.Locale;
  */
 public class ReportAccidentsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button addNewPhoto,uploadPhotos;
-    private RecyclerView recyclerView;
     private ArrayList<ImageDetails> imageDetailses = new ArrayList<>();
     private static final int CAMERA_REQUEST = 2000;
     private static final String IMAGE_DIRECTORY_NAME = "ceylinco";
     private Uri fileUri;
-    private Context con;
-    private StaggeredGridLayoutManager staggeredGridLayoutManager;
     private ImageGalleryRecycleAdapter imageGalleryRecycleAdapter;
 
 
@@ -65,15 +61,15 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
     }
 
     private void initialize() {
-        addNewPhoto = (Button)findViewById(R.id.addNewPhoto);
-        uploadPhotos = (Button)findViewById(R.id.upload);
-        recyclerView = (RecyclerView)findViewById(R.id.imgGallery) ;
+        Button addNewPhoto = (Button) findViewById(R.id.addNewPhoto);
+        Button uploadPhotos = (Button) findViewById(R.id.upload);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.imgGallery);
         recyclerView.setHasFixedSize(true);
-        staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, 1);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, 1);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         imageGalleryRecycleAdapter = new ImageGalleryRecycleAdapter(this,imageDetailses);
         recyclerView.setAdapter(imageGalleryRecycleAdapter);
-        con = this;
+        Context con = this;
         addNewPhoto.setOnClickListener(this);
         uploadPhotos.setOnClickListener(this);
 
@@ -126,7 +122,7 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
     private void captureImage() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        fileUri = getOutputMediaFileUri(1);
+        fileUri = getOutputMediaFileUri();
 
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 
@@ -137,8 +133,8 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
     /**
      * Creating file uri to store image/video
      */
-    public Uri getOutputMediaFileUri(int type) {
-        return Uri.fromFile(getOutputMediaFile(type));
+    public Uri getOutputMediaFileUri() {
+        return Uri.fromFile(getOutputMediaFile(1));
     }
 
     /**
