@@ -1,29 +1,32 @@
 package com.ceylinco.ceylincocustomerapp.newInsurances.paymentMode;
 
-import android.app.DatePickerDialog;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ceylinco.ceylincocustomerapp.util.DatePickerCustom;
 import com.ceylinco.ceylincocustomerapp.R;
-
-import java.util.Calendar;
+import com.ceylinco.ceylincocustomerapp.models.NewInsuranceFormModel;
+import com.ceylinco.ceylincocustomerapp.util.AppController;
 
 /**
  * Created by Prishan Maduka on 7/23/2016.
  */
 public class PaymentModeRegistrationTwo extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnLogin;
-    ImageView imgYearOfMake;
-    static TextView yearOfMake;
+    private Button btnLogin;
+    private ImageView imgYearOfMake;
+    private static TextView yearOfMake;
+    private AlertDialog alertDialog;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +47,14 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
         abar.setDisplayHomeAsUpEnabled(true);
         abar.setHomeButtonEnabled(true);
 
+        NewInsuranceFormModel formModel = getIntent().getParcelableExtra("DATA");
+        Log.d("xxxxx",formModel.getAddress());
+
         initialize();
     }
 
     private void initialize() {
-
+        context = PaymentModeRegistrationTwo.this;
         btnLogin = (Button)findViewById(R.id.btnLogin);
         imgYearOfMake = (ImageView)findViewById(R.id.imgYear);
         yearOfMake = (TextView)findViewById(R.id.yearTextview);
@@ -62,35 +68,28 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
         if(v.getId()==R.id.btnLogin){
 
         }else if(v.getId()==R.id.imgYear){
-            showDatePicker();
+            alertDialog = showCustomDialog(v.getId());
+            alertDialog.show();
         }
     }
 
-    DatePickerDialog.OnDateSetListener makeYearListener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            yearOfMake.setText(dayOfMonth+"/"+monthOfYear+"/"+year);
+    private AlertDialog showCustomDialog(int id) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
+        if(id == R.id.imgYear){
+            builder.setTitle("Select Year of Make")
+                    .setItems(R.array.make_year_array, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            yearOfMake.setTextColor(AppController.getColor(context,R.color.colorPrimaryDark));
+                            String[] yearArray = context.getResources().getStringArray(R.array.make_year_array);
+                            yearOfMake.setText(yearArray[which]);
+                        }
+                    });
         }
-    };
 
-    private void showDatePicker() {
-        DatePickerCustom date = new DatePickerCustom();
-        /**
-         * Set Up Current Date Into dialog
-         */
-        Calendar calender = Calendar.getInstance();
-        Bundle args = new Bundle();
-        args.putInt("YEAR", calender.get(Calendar.YEAR));
-        args.putInt("MONTH", calender.get(Calendar.MONTH));
-        args.putInt("DAY", calender.get(Calendar.DAY_OF_MONTH));
-        date.setArguments(args);
-        /**
-         * Set Call back to capture selected date
-         */
-        date.setCallBack(makeYearListener);
-        date.show(getSupportFragmentManager(), "Date Picker");
+
+        return builder.create();
     }
+
 
 }

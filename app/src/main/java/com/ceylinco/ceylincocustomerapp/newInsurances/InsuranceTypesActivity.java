@@ -18,7 +18,8 @@ import com.ceylinco.ceylincocustomerapp.newInsurances.paymentMode.PaymentModeReg
  */
 public class InsuranceTypesActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView paymentMode,comprehensiveMode;
+    private ImageView paymentMode,comprehensiveMode;
+    private String vType = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class InsuranceTypesActivity extends AppCompatActivity implements View.On
     }
 
     private void initialize() {
+        vType = getIntent().getStringExtra("vtype");
 
         paymentMode = (ImageView)findViewById(R.id.idPaymentMode);
         comprehensiveMode = (ImageView)findViewById(R.id.idComprehensive);
@@ -56,10 +58,12 @@ public class InsuranceTypesActivity extends AppCompatActivity implements View.On
 
         if(v.getId()== R.id.idPaymentMode){
             Intent intent = new Intent(InsuranceTypesActivity.this,PaymentModeRegistrationOne.class);
+            intent.putExtra("vtype",vType);
             startActivity(intent);
 
         }else if(v.getId()== R.id.idComprehensive){
             Intent intent = new Intent(InsuranceTypesActivity.this,ComprehensiveRegistrationOne.class);
+            intent.putExtra("vtype",vType);
             startActivity(intent);
 
         }

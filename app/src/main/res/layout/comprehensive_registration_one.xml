@@ -24,6 +24,7 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"/>
 
         <ImageView
+            android:id="@+id/spinnerArrow"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.15"
