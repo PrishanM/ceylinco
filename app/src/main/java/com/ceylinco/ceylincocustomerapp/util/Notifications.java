@@ -30,8 +30,8 @@ public class Notifications {
         return builder.create();
     }
 
-    //Http request-response  error dialog
-    public AlertDialog showHttpErrorDialog(Context context,String message){
+    //General alert dialog
+    public AlertDialog showGeneralDialog(Context context,String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(message);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

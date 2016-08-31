@@ -73,6 +73,7 @@ public class PaymentModeRegistrationOne extends AppCompatActivity implements Vie
         if(v.getId()==R.id.btnNext){
             if(isValid()){
                 NewInsuranceFormModel newInsuranceFormModel = new NewInsuranceFormModel();
+                newInsuranceFormModel.setvType(getIntent().getStringExtra("vtype"));
                 newInsuranceFormModel.setRegType(regType.getText().toString());
                 newInsuranceFormModel.setvNo(vehNo.getText().toString());
                 newInsuranceFormModel.setName(name.getText().toString());
@@ -99,6 +100,7 @@ public class PaymentModeRegistrationOne extends AppCompatActivity implements Vie
                     }else{
                         regType.setText("Unregistered");
                     }
+                    regType.setError(null);
                 }
             });
 
@@ -111,6 +113,7 @@ public class PaymentModeRegistrationOne extends AppCompatActivity implements Vie
         boolean isValidInput = true;
 
         if(!regType.getText().toString().equalsIgnoreCase("Registered") && !regType.getText().toString().equalsIgnoreCase("Unregistered")){
+            regType.setError("Error");
             isValidInput = false;
         }
 
@@ -132,6 +135,9 @@ public class PaymentModeRegistrationOne extends AppCompatActivity implements Vie
         if(email.getText()==null || email.getText().toString().isEmpty()){
             isValidInput = false;
             email.setError(getString(R.string.required_email));
+        }else if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
+            isValidInput = false;
+            email.setError(getString(R.string.invalid_email));
         }
 
         if(address.getText()==null || address.getText().toString().isEmpty()){

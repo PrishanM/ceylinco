@@ -70,10 +70,13 @@
     <string name="required_name">Name required</string>
     <string name="required_contact">Contact number required</string>
     <string name="required_email">Email required</string>
+    <string name="invalid_email">Invalid email</string>
     <string name="required_address">Address required</string>
     <string name="required_nic">ID/PP/Business Reg. No required</string>
     <string name="required_chasis">Chasis number required</string>
     <string name="required_eno">Engine number required</string>
+    <string name="required_branch">Branch required</string>
+    <string name="required_location">Location required</string>
 
     <string-array name="reg_types">
         <item>Registered</item>
@@ -108,6 +111,18 @@
         <item>2014</item>
         <item>2015</item>
         <item>2016</item>
+    </string-array>
+
+    <string-array name="make_array">
+        <item>Honda</item>
+        <item>Toyota</item>
+        <item>Nissan</item>
+    </string-array>
+
+    <string-array name="model_array">
+        <item>123</item>
+        <item>234</item>
+        <item>345</item>
     </string-array>
 
 
@@ -148,5 +163,9 @@
     <!-- Policy Details -->
     <string name="renew_policy">Please renew my policy</string>
     <string name="contact_branch">For more details contact the branch 07754589652</string>
+
+    <!-- Application URLs -->
+    <string name="base_url">http://202.124.181.76/vip_webservice/</string>
+    <string name="third_party_submit_url">submit_form_data_thirdparty.aspx</string>
 
 </resources>
