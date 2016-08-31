@@ -20,9 +20,12 @@ import com.ceylinco.ceylincocustomerapp.R;
  */
 public class InquiryActivity extends AppCompatActivity implements View.OnClickListener {
 
-    LinearLayout layoutCall,layoutBranches,layoutLocations,layoutLogo;
-    TextView textviewTitle;
-    FrameLayout frameLayout;
+    private LinearLayout layoutCall;
+    private LinearLayout layoutBranches;
+    private LinearLayout layoutLocations;
+    private LinearLayout layoutLogo;
+    private TextView textviewTitle;
+    private FrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

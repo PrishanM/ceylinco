@@ -14,7 +14,6 @@
         android:weightSum="1">
 
         <EditText
-            android:id="@+id/valOfVehicle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -38,7 +37,6 @@
         android:weightSum="1">
 
         <TextView
-            android:id="@+id/makeTextview"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.85"
@@ -134,7 +132,6 @@
         android:weightSum="1">
 
         <EditText
-            android:id="@+id/leasingCompany"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -164,7 +161,6 @@
             android:textColor="@color/spinner_color"/>
 
         <RadioGroup
-            android:id="@+id/radioUse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -173,7 +169,6 @@
             android:weightSum="3">
 
             <RadioButton
-                android:id="@+id/radioPrivate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Private"
@@ -182,7 +177,6 @@
                 android:checked="true" />
 
             <RadioButton
-                android:id="@+id/radioHiring"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:textColor="@color/textColorPrimary"
@@ -190,7 +184,6 @@
                 android:text="Hiring" />
 
             <RadioButton
-                android:id="@+id/radioRent"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:textColor="@color/textColorPrimary"
@@ -219,7 +212,6 @@
             android:textColor="@color/spinner_color"/>
 
         <RadioGroup
-            android:id="@+id/radioType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -265,7 +257,6 @@
         android:weightSum="1">
 
         <EditText
-            android:id="@+id/presentMeterReading"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -288,7 +279,6 @@
         android:visibility="gone">
 
         <EditText
-            android:id="@+id/purchasePrice"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

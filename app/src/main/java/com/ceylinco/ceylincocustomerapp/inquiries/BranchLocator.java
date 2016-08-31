@@ -52,7 +52,7 @@ public class BranchLocator extends Fragment implements OnMapReadyCallback {
 
         //Check network connectivity
         AlertDialog alertDialog;
-        if(!DetectNetwork.isConnected()){
+        if(DetectNetwork.isConnected()){
             alertDialog = notifications.showNetworkNotification(getActivity());
             alertDialog.show();
         }

@@ -17,7 +17,14 @@ import com.ceylinco.ceylincocustomerapp.R;
  */
 public class NewInsuranceVehicleListActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView imgCar,imgVan,imgBus,imgLorry,imgBike, imgThreeWheeler,imgJeep,imgDoubleCab;
+    private ImageView imgCar;
+    private ImageView imgVan;
+    private ImageView imgBus;
+    private ImageView imgLorry;
+    private ImageView imgBike;
+    private ImageView imgThreeWheeler;
+    private ImageView imgJeep;
+    private ImageView imgDoubleCab;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -16,7 +16,7 @@ import com.ceylinco.ceylincocustomerapp.R;
  */
 public class ExistingPolicyActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnLogin;
+    private Button btnLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

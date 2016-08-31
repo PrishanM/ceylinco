@@ -52,7 +52,7 @@ public class Result {
     @JsonProperty("rating")
     private Integer rating;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 

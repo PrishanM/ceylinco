@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Prishan Maduka on 7/11/2016.
  */
 public class SplashActivity extends Activity {
-    List<String> permissionList = new ArrayList<String>();
+    private final List<String> permissionList = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

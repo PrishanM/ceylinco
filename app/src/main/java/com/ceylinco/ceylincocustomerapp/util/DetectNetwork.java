@@ -14,7 +14,7 @@ public class DetectNetwork {
         setmContext(context);
     }
     
-	public static Context getmContext() {
+	private static Context getmContext() {
 		return mContext;
 	}
 
@@ -24,7 +24,7 @@ public class DetectNetwork {
 	
 	public static boolean isConnected(){
         ConnectivityManager conManager = (ConnectivityManager) getmContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-		return conManager.getActiveNetworkInfo() != null && conManager.getActiveNetworkInfo().isAvailable() && conManager.getActiveNetworkInfo().isConnected();
+		return conManager.getActiveNetworkInfo() == null || !conManager.getActiveNetworkInfo().isAvailable() || !conManager.getActiveNetworkInfo().isConnected();
     }
 
 	public static boolean isLocationEnabled(Context context) {

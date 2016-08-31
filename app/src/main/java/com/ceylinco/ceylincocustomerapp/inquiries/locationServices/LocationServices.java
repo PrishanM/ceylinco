@@ -15,8 +15,10 @@ import com.ceylinco.ceylincocustomerapp.R;
  */
 public class LocationServices extends Fragment implements View.OnClickListener {
 
-    View rootView;
-    LinearLayout policeStations,banks,hospitals;
+    private View rootView;
+    private LinearLayout policeStations;
+    private LinearLayout banks;
+    private LinearLayout hospitals;
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.inquiry_layout, container, false);

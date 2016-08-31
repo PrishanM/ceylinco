@@ -19,8 +19,8 @@ import java.util.ArrayList;
  */
 public class ImageGalleryRecycleAdapter extends  RecyclerView.Adapter<ImageGalleryRecycleAdapter.ImageViewHolder> {
 
-    Context context;
-    ArrayList<ImageDetails> imageList;
+    private final Context context;
+    private final ArrayList<ImageDetails> imageList;
 
     public ImageGalleryRecycleAdapter(Context context, ArrayList<ImageDetails> list){
         this.context = context;
@@ -52,8 +52,8 @@ public class ImageGalleryRecycleAdapter extends  RecyclerView.Adapter<ImageGalle
     }
 
     public class ImageViewHolder extends RecyclerView.ViewHolder {
-        public ImageView imageView;
-        public ImageView checkBox;
+        public final ImageView imageView;
+        public final ImageView checkBox;
         public ImageViewHolder(View itemView) {
             super(itemView);
             imageView = (ImageView)itemView.findViewById(R.id.imgView);

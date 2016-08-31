@@ -16,7 +16,7 @@ import com.ceylinco.ceylincocustomerapp.R;
  */
 public class SelectVehicleActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnNext;
+    private Button btnNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

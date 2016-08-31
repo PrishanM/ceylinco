@@ -31,7 +31,7 @@ public class LocationModel {
     @JsonProperty("status")
     private String status;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 

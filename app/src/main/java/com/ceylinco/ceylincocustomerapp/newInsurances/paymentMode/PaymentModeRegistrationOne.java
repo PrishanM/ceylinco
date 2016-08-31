@@ -22,9 +22,7 @@ import com.ceylinco.ceylincocustomerapp.util.AppController;
  */
 public class PaymentModeRegistrationOne extends AppCompatActivity implements View.OnClickListener{
 
-    private Button btnNext;
     private EditText vehNo,name,contactNo,email,address,nic,chasisNo,engineNo;
-    private ImageView imgSpinnerArrow;
     private TextView regType;
 
     @Override
@@ -51,8 +49,8 @@ public class PaymentModeRegistrationOne extends AppCompatActivity implements Vie
 
     private void initialize() {
 
-        btnNext = (Button)findViewById(R.id.btnNext);
-        imgSpinnerArrow = (ImageView)findViewById(R.id.spinnerArrow);
+        Button btnNext = (Button) findViewById(R.id.btnNext);
+        ImageView imgSpinnerArrow = (ImageView) findViewById(R.id.spinnerArrow);
 
         vehNo = (EditText)findViewById(R.id.vehicleNoTextview);
         name = (EditText)findViewById(R.id.companyName);
@@ -94,7 +92,7 @@ public class PaymentModeRegistrationOne extends AppCompatActivity implements Vie
             builder.setTitle("Select Registration Type")
             .setItems(R.array.reg_types, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    regType.setTextColor(AppController.getColor(PaymentModeRegistrationOne.this,R.color.colorPrimaryDark));
+                    regType.setTextColor(AppController.getColor(PaymentModeRegistrationOne.this));
                     if(which==0){
                         regType.setText("Registered");
                     }else{

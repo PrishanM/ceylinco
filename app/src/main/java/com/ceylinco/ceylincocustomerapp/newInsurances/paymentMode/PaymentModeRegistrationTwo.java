@@ -1,6 +1,7 @@
 package com.ceylinco.ceylincocustomerapp.newInsurances.paymentMode;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -31,16 +32,13 @@ import java.io.IOException;
  */
 public class PaymentModeRegistrationTwo extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnLogin;
-    private ImageView imgYearOfMake,imgMake,imgModel;
     private static TextView yearOfMake,txtMake,txtModel;
     private EditText branch,location;
     private AlertDialog alertDialog;
     private Context context;
     private NewInsuranceFormModel formModel;
-    private Notifications notifications = new Notifications();
-
-    private final String APPLICATION_TAG = "THIRD PARTY POLICY";
+    private final Notifications notifications = new Notifications();
+    private ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,18 +60,17 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
         abar.setHomeButtonEnabled(true);
 
         formModel = getIntent().getParcelableExtra("DATA");
-        Log.d("xxxxx",formModel.getAddress());
 
         initialize();
     }
 
     private void initialize() {
         context = PaymentModeRegistrationTwo.this;
-        btnLogin = (Button)findViewById(R.id.btnLogin);
+        Button btnLogin = (Button) findViewById(R.id.btnLogin);
 
-        imgYearOfMake = (ImageView)findViewById(R.id.imgYear);
-        imgMake = (ImageView)findViewById(R.id.imgMake);
-        imgModel = (ImageView)findViewById(R.id.imgModel);
+        ImageView imgYearOfMake = (ImageView) findViewById(R.id.imgYear);
+        ImageView imgMake = (ImageView) findViewById(R.id.imgMake);
+        ImageView imgModel = (ImageView) findViewById(R.id.imgModel);
 
         yearOfMake = (TextView)findViewById(R.id.yearTextview);
         txtMake = (TextView)findViewById(R.id.makeTextView);
@@ -98,6 +95,12 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
                 formModel.setMake(txtMake.getText().toString());
                 formModel.setModel(txtModel.getText().toString());
 
+
+                progress = new ProgressDialog(context);
+                progress.setMessage("Creating Insurance Policy...");
+                progress.show();
+                progress.setCanceledOnTouchOutside(true);
+
                 JsonRequestManager.getInstance(this).thirdPartyInsurance(getResources().getString(R.string.base_url) + getResources().getString(R.string.third_party_submit_url), formModel, callback);
             }
         }else if(v.getId()==R.id.imgYear || v.getId()==R.id.imgMake || v.getId()==R.id.imgModel){
@@ -112,8 +115,11 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
     private final JsonRequestManager.thirdPartyInsuranceRequest callback = new JsonRequestManager.thirdPartyInsuranceRequest() {
         @Override
         public void onSuccess(String response) {
+            if(progress!=null){
+                progress.dismiss();
+            }
 
-
+            String APPLICATION_TAG = "THIRD PARTY POLICY";
             try {
 
                 ObjectMapper mapper = new ObjectMapper();
@@ -143,6 +149,9 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
 
         @Override
         public void onError(String response) {
+            if(progress!=null){
+                progress.dismiss();
+            }
             alertDialog = notifications.showGeneralDialog(context,response);
             alertDialog.show();
         }
@@ -155,7 +164,7 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
             builder.setTitle("Select Year of Make")
                     .setItems(R.array.make_year_array, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            yearOfMake.setTextColor(AppController.getColor(context,R.color.colorPrimaryDark));
+                            yearOfMake.setTextColor(AppController.getColor(context));
                             String[] yearArray = context.getResources().getStringArray(R.array.make_year_array);
                             yearOfMake.setText(yearArray[which]);
                             yearOfMake.setError(null);
@@ -165,7 +174,7 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
             builder.setTitle("Select Vehicle Make")
                     .setItems(R.array.make_array, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            txtMake.setTextColor(AppController.getColor(context,R.color.colorPrimaryDark));
+                            txtMake.setTextColor(AppController.getColor(context));
                             String[] makeArray = context.getResources().getStringArray(R.array.make_array);
                             txtMake.setText(makeArray[which]);
                             txtMake.setError(null);
@@ -175,7 +184,7 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
             builder.setTitle("Select Vehicle Model")
                     .setItems(R.array.model_array, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            txtModel.setTextColor(AppController.getColor(context,R.color.colorPrimaryDark));
+                            txtModel.setTextColor(AppController.getColor(context));
                             String[] modelArray = context.getResources().getStringArray(R.array.model_array);
                             txtModel.setText(modelArray[which]);
                             txtModel.setError(null);

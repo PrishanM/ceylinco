@@ -18,7 +18,7 @@ import javax.net.ssl.HttpsURLConnection;
  * Used to download the image, and after download completes,
  * display it to imageView
  */
-public class DownloaderTask extends AsyncTask<String, Void, Bitmap> {
+class DownloaderTask extends AsyncTask<String, Void, Bitmap> {
     private final WeakReference<ImageView> imageViewReference;
 
     public DownloaderTask(ImageView imageView) {

@@ -32,7 +32,7 @@ import java.util.Locale;
  */
 public class ReportAccidentsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ArrayList<ImageDetails> imageDetailses = new ArrayList<>();
+    private final ArrayList<ImageDetails> imageDetailses = new ArrayList<>();
     private static final int CAMERA_REQUEST = 2000;
     private static final String IMAGE_DIRECTORY_NAME = "ceylinco";
     private Uri fileUri;
@@ -75,12 +75,12 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
             @Override
-            public void onClick(View view, int position) {
+            public void onClick() {
                 Log.d("TAG","ON CLICK");
             }
 
             @Override
-            public void onLongClick(View view, int position) {
+            public void onLongClick(int position) {
                 if(imageDetailses.get(position).isChecked()){
                     imageDetailses.get(position).setChecked(false);
                 }else{
@@ -172,15 +172,15 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
 
     //ClickListener interface for images recycle view
     public interface ClickListener {
-        void onClick(View view, int position);
+        void onClick();
 
-        void onLongClick(View view,int position);
+        void onLongClick(int position);
     }
 
     public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
-        private GestureDetector gestureDetector;
-        private ReportAccidentsActivity.ClickListener clickListener;
+        private final GestureDetector gestureDetector;
+        private final ReportAccidentsActivity.ClickListener clickListener;
 
         public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ReportAccidentsActivity.ClickListener clickListener) {
             this.clickListener = clickListener;
@@ -194,7 +194,7 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
                 public void onLongPress(MotionEvent e) {
                     View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
                     if (child != null && clickListener != null) {
-                        clickListener.onLongClick(child, recyclerView.getChildPosition(child));
+                        clickListener.onLongClick(recyclerView.getChildPosition(child));
                     }
                 }
             });

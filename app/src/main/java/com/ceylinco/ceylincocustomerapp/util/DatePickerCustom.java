@@ -10,7 +10,7 @@ import android.support.v4.app.DialogFragment;
  */
 public class DatePickerCustom extends DialogFragment {
 
-    DatePickerDialog.OnDateSetListener onDateSet;
+    private DatePickerDialog.OnDateSetListener onDateSet;
 
     public DatePickerCustom(){
 

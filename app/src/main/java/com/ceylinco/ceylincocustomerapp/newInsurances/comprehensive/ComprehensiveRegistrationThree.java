@@ -22,11 +22,14 @@ import java.util.Calendar;
  */
 public class ComprehensiveRegistrationThree extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnLogin;
-    ImageView imgFirstReg,imgPurchaseDate;
-    static TextView firstRegistration,purchaseDateTextView;
-    boolean isBrandNew = true;
-    LinearLayout layoutPurchaseDate,layoutFirstRegDate;
+    private Button btnLogin;
+    private ImageView imgFirstReg;
+    private ImageView imgPurchaseDate;
+    private static TextView firstRegistration;
+    private static TextView purchaseDateTextView;
+    private boolean isBrandNew = true;
+    private LinearLayout layoutPurchaseDate;
+    private LinearLayout layoutFirstRegDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +86,7 @@ public class ComprehensiveRegistrationThree extends AppCompatActivity implements
         }
     }
 
-    DatePickerDialog.OnDateSetListener purchaseDateListener = new DatePickerDialog.OnDateSetListener() {
+    private final DatePickerDialog.OnDateSetListener purchaseDateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
@@ -92,7 +95,7 @@ public class ComprehensiveRegistrationThree extends AppCompatActivity implements
         }
     };
 
-    DatePickerDialog.OnDateSetListener regDateListener = new DatePickerDialog.OnDateSetListener() {
+    private final DatePickerDialog.OnDateSetListener regDateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {

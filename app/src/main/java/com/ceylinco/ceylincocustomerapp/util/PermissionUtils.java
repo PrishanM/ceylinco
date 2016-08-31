@@ -25,7 +25,7 @@ public abstract class PermissionUtils {
     public static void requestPermission(AppCompatActivity activity, int requestId) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_FINE_LOCATION)) {
             // Display a dialog with rationale.
-            RationaleDialog.newInstance(requestId, true)
+            RationaleDialog.newInstance(requestId)
                     .show(activity.getSupportFragmentManager(), "dialog");
         } else {
             // Location permission has not been granted yet, request it.
@@ -113,17 +113,15 @@ public abstract class PermissionUtils {
          * permission.
          * <p>
          * The permission is requested after clicking 'ok'.
-         *
-         * @param requestCode    Id of the request that is used to request the permission. It is
+         *  @param requestCode    Id of the request that is used to request the permission. It is
          *                       returned to the
          *                       {@link ActivityCompat.OnRequestPermissionsResultCallback}.
-         * @param finishActivity Whether the calling Activity should be finished if the dialog is
-         *                       cancelled.
+         *
          */
-        public static RationaleDialog newInstance(int requestCode, boolean finishActivity) {
+        public static RationaleDialog newInstance(int requestCode) {
             Bundle arguments = new Bundle();
             arguments.putInt(ARGUMENT_PERMISSION_REQUEST_CODE, requestCode);
-            arguments.putBoolean(ARGUMENT_FINISH_ACTIVITY, finishActivity);
+            arguments.putBoolean(ARGUMENT_FINISH_ACTIVITY, true);
             RationaleDialog dialog = new RationaleDialog();
             dialog.setArguments(arguments);
             return dialog;

@@ -23,7 +23,7 @@ public class Location {
     @JsonProperty("lng")
     private Double lng;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 

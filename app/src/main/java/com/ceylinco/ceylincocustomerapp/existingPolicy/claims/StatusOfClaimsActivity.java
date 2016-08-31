@@ -19,8 +19,8 @@ import com.ceylinco.ceylincocustomerapp.R;
  */
 public class StatusOfClaimsActivity extends AppCompatActivity {
 
-    ClaimsAdapter claimsAdapter;
-    ListView claimsList;
+    private ClaimsAdapter claimsAdapter;
+    private ListView claimsList;
 
 
     @Override

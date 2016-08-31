@@ -24,11 +24,12 @@ import java.util.Calendar;
  */
 public class ComprehensiveRegistrationTwo extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnNext;
-    ImageView imgYearOfMake;
-    static TextView yearOfMake;
-    LinearLayout meterReadingLayout,priceLayout;
-    boolean isBranNew = true;
+    private Button btnNext;
+    private ImageView imgYearOfMake;
+    private static TextView yearOfMake;
+    private LinearLayout meterReadingLayout;
+    private LinearLayout priceLayout;
+    private boolean isBranNew = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

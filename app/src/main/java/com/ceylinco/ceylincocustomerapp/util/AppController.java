@@ -17,7 +17,7 @@ import com.android.volley.toolbox.Volley;
  *
  */
 public class AppController extends Application{
-    public static final String TAG = AppController.class
+    private static final String TAG = AppController.class
             .getSimpleName();
 
     private RequestQueue mRequestQueue;
@@ -35,7 +35,7 @@ public class AppController extends Application{
         return mInstance;
     }
 
-    public RequestQueue getRequestQueue() {
+    private RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         }
@@ -69,18 +69,12 @@ public class AppController extends Application{
         }
     }
 
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        //MultiDex.install(this);
-    }
-
-    public static final int getColor(Context context, int id) {
+    public static int getColor(Context context) {
         final int version = Build.VERSION.SDK_INT;
         if (version >= 23) {
-            return ContextCompat.getColor(context,id);
+            return ContextCompat.getColor(context, com.ceylinco.ceylincocustomerapp.R.color.colorPrimaryDark);
         } else {
-            return context.getResources().getColor(id);
+            return context.getResources().getColor(com.ceylinco.ceylincocustomerapp.R.color.colorPrimaryDark);
         }
     }
 }

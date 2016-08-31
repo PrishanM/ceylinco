@@ -19,7 +19,9 @@ import com.ceylinco.ceylincocustomerapp.existingPolicy.claims.StatusOfClaimsActi
  */
 public class SelectedVehicleActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView statusOfClaims,policyDetails,vvipAccidents;
+    private ImageView statusOfClaims;
+    private ImageView policyDetails;
+    private ImageView vvipAccidents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

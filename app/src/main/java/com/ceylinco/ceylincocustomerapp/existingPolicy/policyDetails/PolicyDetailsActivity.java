@@ -19,10 +19,10 @@ import java.util.List;
  */
 public class PolicyDetailsActivity extends AppCompatActivity {
 
-    PolicyDetailsListAdapter listAdapter;
-    ExpandableListView expListView;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
+    private PolicyDetailsListAdapter listAdapter;
+    private ExpandableListView expListView;
+    private List<String> listDataHeader;
+    private HashMap<String, List<String>> listDataChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -16,12 +16,12 @@ import java.util.List;
 /**
  * Created by Prishan Maduka on 7/28/2016.
  */
-public class PolicyDetailsListAdapter extends BaseExpandableListAdapter {
+class PolicyDetailsListAdapter extends BaseExpandableListAdapter {
 
-    private Context _context;
-    private List<String> _listDataHeader; // header titles
+    private final Context _context;
+    private final List<String> _listDataHeader; // header titles
     // child data in format of header title, child title
-    private HashMap<String, List<String>> _listDataChild;
+    private final HashMap<String, List<String>> _listDataChild;
 
     public PolicyDetailsListAdapter(Context context,List<String> listHeaders,HashMap<String, List<String>> listChildren){
         this._context = context;

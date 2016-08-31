@@ -13,9 +13,12 @@ import com.ceylinco.ceylincocustomerapp.existingPolicy.ExistingPolicyActivity;
 import com.ceylinco.ceylincocustomerapp.inquiries.InquiryActivity;
 import com.ceylinco.ceylincocustomerapp.newInsurances.NewInsuranceVehicleListActivity;
 
+@SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView imgNew,imgExisting,imgInquiries;
+    private ImageView imgNew;
+    private ImageView imgExisting;
+    private ImageView imgInquiries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -20,7 +20,7 @@ public class Geometry {
     @JsonProperty("location")
     private Location location;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 

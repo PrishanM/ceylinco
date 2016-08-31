@@ -48,7 +48,7 @@ public class ValueAddedServicesActivity extends AppCompatActivity implements OnM
     private Context context;
     private String type;
     private View loadingSpinner;
-    final Handler handler = new Handler();
+    private final Handler handler = new Handler();
     private Runnable runnable;
 
     @Override
@@ -83,7 +83,7 @@ public class ValueAddedServicesActivity extends AppCompatActivity implements OnM
 
         //Check network connectivity
         AlertDialog alertDialog;
-        if(!DetectNetwork.isConnected()){
+        if(DetectNetwork.isConnected()){
             alertDialog = notifications.showNetworkNotification(context);
             alertDialog.show();
         }
@@ -178,7 +178,7 @@ public class ValueAddedServicesActivity extends AppCompatActivity implements OnM
         handler.postDelayed(runnable, 3000);
     }
 
-    JsonRequestManager.getLocationDetailsRequest callback = new JsonRequestManager.getLocationDetailsRequest(){
+    private final JsonRequestManager.getLocationDetailsRequest callback = new JsonRequestManager.getLocationDetailsRequest(){
 
         @Override
         public void onSuccess(LocationModel locationModel) {
@@ -201,7 +201,7 @@ public class ValueAddedServicesActivity extends AppCompatActivity implements OnM
         }
 
         @Override
-        public void onError(String status) {
+        public void onError() {
             loadingSpinner.setVisibility(View.GONE);
         }
     };

@@ -92,7 +92,6 @@
             android:layout_height="@dimen/standard_space" />
 
         <CheckBox
-            android:id="@+id/checkBoxFlood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"
@@ -100,14 +99,12 @@
             android:textColor="@color/textColorPrimary"/>
 
         <CheckBox
-            android:id="@+id/checkBoxRiot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/riot_cover"
             android:textColor="@color/textColorPrimary"/>
 
         <CheckBox
-            android:id="@+id/checkBoxNoClaim"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"

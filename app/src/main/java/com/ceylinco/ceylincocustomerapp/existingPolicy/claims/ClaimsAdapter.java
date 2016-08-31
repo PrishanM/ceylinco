@@ -14,9 +14,9 @@ import com.ceylinco.ceylincocustomerapp.R;
  * @author Prishanm
  * Used for Listview in MORE SHOPS
  */
-public class ClaimsAdapter extends BaseAdapter{
+class ClaimsAdapter extends BaseAdapter{
 
-    Context con;
+    private final Context con;
 
     public ClaimsAdapter(Context context){
         this.con = context;
@@ -44,7 +44,7 @@ public class ClaimsAdapter extends BaseAdapter{
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) con
                     .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.claim_list_row, null);
+            convertView = mInflater.inflate(R.layout.claim_list_row, parent,false);
         }
 
         final LinearLayout layout = (LinearLayout)convertView.findViewById(R.id.rowLayout);

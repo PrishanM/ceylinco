@@ -44,12 +44,12 @@ public class JsonRequestManager {
 		return mInstance;
 	}
 
-	public JsonRequestManager(Context context) {
+	private JsonRequestManager(Context context) {
 		mCtx = context;
 		mRequestQueue = getRequestQueue();
 	}
 
-	public RequestQueue getRequestQueue() {
+	private RequestQueue getRequestQueue() {
 		if (mRequestQueue == null) {
 			mRequestQueue = Volley
 					.newRequestQueue(mCtx.getApplicationContext());
@@ -66,7 +66,7 @@ public class JsonRequestManager {
 	public interface getLocationDetailsRequest {
 		void onSuccess(LocationModel s);
 
-		void onError(String status);
+		void onError();
 	}
 
 	public void getLocationDetails(String url,
@@ -82,14 +82,13 @@ public class JsonRequestManager {
 							LocationModel locationModel = mapper.readValue(response.toString(), LocationModel.class);
 							callback.onSuccess(locationModel);
 						} catch (Exception e) {
-							callback.onError("Error occurred");
+							callback.onError();
 						}
 					}
 				}, new Response.ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError volleyError) {
-				callback.onError(VolleyErrorHelper.getMessage(volleyError,
-						mCtx));
+				callback.onError();
 			}
 		});
 

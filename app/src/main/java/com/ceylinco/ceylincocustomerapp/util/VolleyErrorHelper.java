@@ -20,7 +20,7 @@ import java.util.Map;
  * @author prishanm 06/01/2016
  *
  */
-public class VolleyErrorHelper {
+class VolleyErrorHelper {
     /**
     * Returns appropriate message which is to be displayed to the user 
     * against the specified error object.

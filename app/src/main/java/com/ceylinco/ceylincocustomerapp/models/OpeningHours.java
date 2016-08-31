@@ -25,7 +25,7 @@ public class OpeningHours {
     @JsonProperty("weekday_text")
     private List<Object> weekdayText = new ArrayList<Object>();
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 

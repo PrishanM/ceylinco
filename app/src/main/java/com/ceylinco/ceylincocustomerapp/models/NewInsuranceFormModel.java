@@ -231,7 +231,7 @@ public class NewInsuranceFormModel implements Parcelable {
     public NewInsuranceFormModel() {
     }
 
-    protected NewInsuranceFormModel(Parcel in) {
+    private NewInsuranceFormModel(Parcel in) {
         this.vType = in.readString();
         this.vNo = in.readString();
         this.regType = in.readString();
