@@ -14,6 +14,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ceylinco.ceylincocustomerapp.models.LocationModel;
 import com.ceylinco.ceylincocustomerapp.models.NewInsuranceFormModel;
+import com.ceylinco.ceylincocustomerapp.models.VehicleMakeModelResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONObject;
@@ -34,7 +35,7 @@ public class JsonRequestManager {
 	/**
 	 * Log or request TAG
 	 */
-	public static final String TAG = "VolleyInstance";
+	private final String tag_json_arry = "json_array_req";
 
 	/* Volley */
 	public static synchronized JsonRequestManager getInstance(Context context) {
@@ -98,7 +99,6 @@ public class JsonRequestManager {
 				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
 		// Adding request to request queue
-		String tag_json_arry = "json_array_req";
 		AppController.getInstance().addToRequestQueue(req,
 				tag_json_arry);
 
@@ -175,6 +175,61 @@ public class JsonRequestManager {
 
 		// Adding request to request queue
 		String tag_json_arry = "json_array_req";
+		AppController.getInstance().addToRequestQueue(req,
+				tag_json_arry);
+
+	}
+
+	/******************************************************************************************************************************************/
+
+	/*
+	* Get Vehicle Make Model List
+	* */
+
+	public interface getMakeModeltRequest {
+		void onSuccess(VehicleMakeModelResponse response);
+
+		void onError(String status);
+	}
+
+	public void getMakeModeltList(String url, final getMakeModeltRequest callback) {
+
+		JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						ObjectMapper mapper = new ObjectMapper();
+						try {
+							if(response!=null) {
+								VehicleMakeModelResponse vehicleMakeModelList = mapper.readValue(response.toString(), VehicleMakeModelResponse.class);
+								if(vehicleMakeModelList.getResults().getType().size()!=0){
+									callback.onSuccess(vehicleMakeModelList);
+								}else{
+									callback.onError("No Vehicle Make Model Data");
+								}
+							}else{
+								callback.onError("No Vehicle Make Model Data");
+							}
+
+						} catch (Exception e) {
+							callback.onError("Error occurred");
+						}
+
+					}
+				}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError volleyError) {
+				callback.onError(VolleyErrorHelper.getMessage(volleyError,
+						mCtx));
+			}
+		});
+
+
+		req.setRetryPolicy(new DefaultRetryPolicy(30000,
+				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+		// Adding request to request queue
 		AppController.getInstance().addToRequestQueue(req,
 				tag_json_arry);
 

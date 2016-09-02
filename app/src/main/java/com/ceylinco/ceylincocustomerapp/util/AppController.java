@@ -3,6 +3,7 @@ package com.ceylinco.ceylincocustomerapp.util;
 import android.app.Application;
 import android.content.Context;
 import android.os.Build;
+import android.support.multidex.MultiDex;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 
@@ -10,6 +11,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -22,6 +26,8 @@ public class AppController extends Application{
 
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
+    public static HashMap<String,ArrayList<String>> listHashMap = null;
+    public static ArrayList<String> vehicleMakeList = null;
 
     private static AppController mInstance;
 
@@ -35,8 +41,17 @@ public class AppController extends Application{
         return mInstance;
     }
 
+    public static ArrayList<String> getVehicleMakeList() {
+        return vehicleMakeList;
+    }
+
+    public static void setVehicleMakeList(ArrayList<String> vehicleMakeList) {
+        AppController.vehicleMakeList = vehicleMakeList;
+    }
+
     private RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
+
             mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         }
 
@@ -76,5 +91,19 @@ public class AppController extends Application{
         } else {
             return context.getResources().getColor(com.ceylinco.ceylincocustomerapp.R.color.colorPrimaryDark);
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
+    public static HashMap<String, ArrayList<String>> getListHashMap() {
+        return listHashMap;
+    }
+
+    public static void setListHashMap(HashMap<String, ArrayList<String>> listHashMap) {
+        AppController.listHashMap = listHashMap;
     }
 }

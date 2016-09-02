@@ -2,6 +2,7 @@ package com.ceylinco.ceylincocustomerapp.newInsurances.comprehensive;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -16,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.ceylinco.ceylincocustomerapp.R;
+import com.ceylinco.ceylincocustomerapp.models.NewInsuranceFormModel;
 
 import java.util.Calendar;
 
@@ -30,6 +32,8 @@ public class ComprehensiveRegistrationTwo extends AppCompatActivity implements V
     private LinearLayout meterReadingLayout;
     private LinearLayout priceLayout;
     private boolean isBranNew = true;
+    private NewInsuranceFormModel formModel;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +54,13 @@ public class ComprehensiveRegistrationTwo extends AppCompatActivity implements V
         abar.setDisplayHomeAsUpEnabled(true);
         abar.setHomeButtonEnabled(true);
 
+        formModel = getIntent().getParcelableExtra("DATA");
+
         initialize();
     }
 
     private void initialize() {
+        context = ComprehensiveRegistrationTwo.this;
 
         btnNext = (Button)findViewById(R.id.btnNext);
         imgYearOfMake = (ImageView)findViewById(R.id.imgYear);

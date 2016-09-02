@@ -171,22 +171,23 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
                         }
                     });
         }else if(id==R.id.imgMake){
+            final CharSequence[] vehicleMakeList = AppController.getVehicleMakeList().toArray(new CharSequence[AppController.getVehicleMakeList().size()]);
             builder.setTitle("Select Vehicle Make")
-                    .setItems(R.array.make_array, new DialogInterface.OnClickListener() {
+                    .setItems(vehicleMakeList, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             txtMake.setTextColor(AppController.getColor(context));
-                            String[] makeArray = context.getResources().getStringArray(R.array.make_array);
-                            txtMake.setText(makeArray[which]);
+                            txtMake.setText(vehicleMakeList[which]);
+                            txtModel.setText(null);
                             txtMake.setError(null);
                         }
                     });
         }else if(id==R.id.imgModel){
+            final CharSequence[] vehicleModelList = AppController.getListHashMap().get(txtMake.getText().toString()).toArray(new CharSequence[AppController.getListHashMap().get(txtMake.getText().toString()).size()]);
             builder.setTitle("Select Vehicle Model")
-                    .setItems(R.array.model_array, new DialogInterface.OnClickListener() {
+                    .setItems(vehicleModelList, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             txtModel.setTextColor(AppController.getColor(context));
-                            String[] modelArray = context.getResources().getStringArray(R.array.model_array);
-                            txtModel.setText(modelArray[which]);
+                            txtModel.setText(vehicleModelList[which]);
                             txtModel.setError(null);
                         }
                     });

@@ -164,7 +164,8 @@
     <string name="contact_branch">For more details contact the branch 07754589652</string>
 
     <!-- Application URLs -->
-    <string name="base_url">http://202.124.181.76/vip_webservice/</string>
+    <string name="base_url">http://202.124.181.76/cusapp_webservice/</string>
+    <string name="vehicle_make_model">get_vehicle_params.aspx</string>
     <string name="third_party_submit_url">submit_form_data_thirdparty.aspx</string>
 
 </resources>
