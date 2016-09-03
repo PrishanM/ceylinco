@@ -4,7 +4,7 @@
     <string name="location_permission_denied">This requires location permission to enable your location services..</string>
     <string name="permission_required_toast">Location permission is required.</string>
     <string name="permission_rationale_location">Access to the location services is required.</string>
-    <string name="server_key">AIzaSyDg4rLfyJixYZtraMENA4wCzDYzpWFOCPw</string>
+    <string name="server_key">AIzaSyButHF3_gy4QWL6lQMDvbT3xEc3PZ82kZ8</string>
 
     <!-- Select option screen -->
     <string name="option_menu_message">Select an Option</string>
@@ -76,6 +76,7 @@
     <string name="required_eno">Engine number required</string>
     <string name="required_branch">Branch required</string>
     <string name="required_location">Location required</string>
+    <string name="required_val_of_vehicle">Value of vehicle required</string>
 
     <string-array name="reg_types">
         <item>Registered</item>
@@ -167,5 +168,6 @@
     <string name="base_url">http://202.124.181.76/cusapp_webservice/</string>
     <string name="vehicle_make_model">get_vehicle_params.aspx</string>
     <string name="third_party_submit_url">submit_form_data_thirdparty.aspx</string>
+    <string name="comprehensive_submit_url">submit_form_data_comprehensive.aspx</string>
 
 </resources>

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.ceylinco.ceylincocustomerapp.R;
 import com.ceylinco.ceylincocustomerapp.models.VehicleMakeModelResponse;
 import com.ceylinco.ceylincocustomerapp.util.AppController;
+import com.ceylinco.ceylincocustomerapp.util.DetectNetwork;
 import com.ceylinco.ceylincocustomerapp.util.JsonRequestManager;
 import com.ceylinco.ceylincocustomerapp.util.Notifications;
 
@@ -66,6 +67,7 @@ public class NewInsuranceVehicleListActivity extends AppCompatActivity implement
     private void initialize() {
 
         context = NewInsuranceVehicleListActivity.this;
+        DetectNetwork.setmContext(context);
 
         imgCar = (ImageView)findViewById(R.id.idCar);
         imgVan = (ImageView)findViewById(R.id.idVan);
@@ -85,7 +87,14 @@ public class NewInsuranceVehicleListActivity extends AppCompatActivity implement
         imgJeep.setOnClickListener(this);
         imgDoubleCab.setOnClickListener(this);
 
-        getVehicleMakeModel();
+        if(DetectNetwork.isConnected()){
+            getVehicleMakeModel();
+        }else{
+            alertDialog = notifications.showNetworkNotification(this);
+            alertDialog.show();
+        }
+
+
     }
 
     private void getVehicleMakeModel() {

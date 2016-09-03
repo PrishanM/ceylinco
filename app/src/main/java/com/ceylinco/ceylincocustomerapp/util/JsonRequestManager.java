@@ -124,7 +124,6 @@ public class JsonRequestManager {
 					@Override
 					public void onResponse(String response) {
 						Log.d("xxxxyy",response.toString());
-						ObjectMapper mapper = new ObjectMapper();
 						try {
 							callback.onSuccess(response.toString());
 						} catch (Exception e) {
@@ -234,6 +233,89 @@ public class JsonRequestManager {
 				tag_json_arry);
 
 	}
+
+	/******************************************************************************************************************************************/
+
+	/*
+	 * Comprehensive new insurance
+	 * */
+
+	public interface comprehensiveInsuranceRequest {
+		void onSuccess(String s);
+
+		void onError(String status);
+	}
+
+	public void comprehensiveInsurance(String url, final NewInsuranceFormModel model, final comprehensiveInsuranceRequest callback) {
+
+
+		StringRequest req = new StringRequest(Request.Method.POST, url,
+				new Response.Listener<String>() {
+					@Override
+					public void onResponse(String response) {
+						Log.d("xxxxyy",response.toString());
+						try {
+							callback.onSuccess(response.toString());
+						} catch (Exception e) {
+							Log.d("xxxxyy",e.getMessage());
+							callback.onError("Error occurred");
+						}
+					}
+				}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError volleyError) {
+				callback.onError(VolleyErrorHelper.getMessage(volleyError,
+						mCtx));
+			}
+		}){
+
+			@Override
+			public String getBodyContentType() {
+				return "application/x-www-form-urlencoded; charset=UTF-8";
+			}
+
+			@Override
+			protected Map<String, String> getParams() throws AuthFailureError {
+				Map<String, String> params = new HashMap<>();
+				params.put("vtype", model.getvType());
+				params.put("vno", model.getvNo());
+				params.put("rtype", model.getRegType());
+				params.put("name", model.getName());
+				params.put("contact_no", model.getContactNo());
+				params.put("email", model.getEmail());
+				params.put("address", model.getAddress());
+				params.put("nic", model.getNic());
+				params.put("ch_no", model.getChasisNo());
+				params.put("en_no", model.getEngineNo());
+				params.put("make_year", model.getMakeYear());
+				params.put("branch", model.getBranch());
+				params.put("location", model.getLocation());
+				params.put("make", model.getMake());
+				params.put("model", model.getModel());
+				params.put("val_veh", model.getVehValue());
+				params.put("leasing_company", model.getLeasingCompany());
+				params.put("v_condition", model.getVehCondition());
+				params.put("purpose_of_use", model.getPurpose());
+				params.put("cur_meter_reading", model.getCurrMeter());
+				params.put("first_reg_date", model.getFirstRegDate());
+				return params;
+			}
+
+		};
+
+
+		req.setRetryPolicy(new DefaultRetryPolicy(30000,
+				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+		// Adding request to request queue
+		String tag_json_arry = "json_array_req";
+		AppController.getInstance().addToRequestQueue(req,
+				tag_json_arry);
+
+	}
+
+	/******************************************************************************************************************************************/
 
 
 }

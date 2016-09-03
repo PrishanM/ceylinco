@@ -84,12 +84,12 @@ public class AppController extends Application{
         }
     }
 
-    public static int getColor(Context context) {
+    public static int getColor(Context context,int id) {
         final int version = Build.VERSION.SDK_INT;
         if (version >= 23) {
-            return ContextCompat.getColor(context, com.ceylinco.ceylincocustomerapp.R.color.colorPrimaryDark);
+            return ContextCompat.getColor(context, id);
         } else {
-            return context.getResources().getColor(com.ceylinco.ceylincocustomerapp.R.color.colorPrimaryDark);
+            return context.getResources().getColor(id);
         }
     }
 

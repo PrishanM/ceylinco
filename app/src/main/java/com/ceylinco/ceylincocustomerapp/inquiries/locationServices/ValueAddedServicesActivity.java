@@ -83,7 +83,7 @@ public class ValueAddedServicesActivity extends AppCompatActivity implements OnM
 
         //Check network connectivity
         AlertDialog alertDialog;
-        if(DetectNetwork.isConnected()){
+        if(!DetectNetwork.isConnected()){
             alertDialog = notifications.showNetworkNotification(context);
             alertDialog.show();
         }

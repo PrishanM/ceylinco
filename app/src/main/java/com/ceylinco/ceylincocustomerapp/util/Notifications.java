@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.Settings;
 
+import com.ceylinco.ceylincocustomerapp.MainActivity;
 import com.ceylinco.ceylincocustomerapp.R;
 
 /**
@@ -62,6 +63,19 @@ public class Notifications {
             public void onClick(DialogInterface paramDialogInterface, int paramInt) {
                 // TODO Auto-generated method stub
 
+            }
+        });
+
+        return builder.create();
+    }
+
+    public AlertDialog insurancePolicySuccessAlert(final Context context, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(message);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Intent intent = new Intent(context, MainActivity.class);
+                context.startActivity(intent);
             }
         });
 

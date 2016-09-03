@@ -199,14 +199,14 @@
         </activity>
 
         <!-- Outstation -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA2htYgeCvZxTMIQRwo_OrZl_mGKR0IKhw" />
-
-        <!-- Home -->
         <!--<meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBO6Df3wBMy9ydmnZnikXdXGoei1GvF3io" />-->
+            android:value="AIzaSyA2htYgeCvZxTMIQRwo_OrZl_mGKR0IKhw" />-->
+
+        <!-- Home -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyApNn8uT_zzwmijn0j0v4-eKO-xIYucepM" />
 
         <meta-data
             android:name="com.google.android.gms.version"

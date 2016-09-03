@@ -19,6 +19,7 @@ import com.ceylinco.ceylincocustomerapp.R;
 import com.ceylinco.ceylincocustomerapp.models.FormSubmitResponse;
 import com.ceylinco.ceylincocustomerapp.models.NewInsuranceFormModel;
 import com.ceylinco.ceylincocustomerapp.util.AppController;
+import com.ceylinco.ceylincocustomerapp.util.DetectNetwork;
 import com.ceylinco.ceylincocustomerapp.util.JsonRequestManager;
 import com.ceylinco.ceylincocustomerapp.util.Notifications;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -26,6 +27,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by Prishan Maduka on 7/23/2016.
@@ -39,6 +42,9 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
     private NewInsuranceFormModel formModel;
     private final Notifications notifications = new Notifications();
     private ProgressDialog progress;
+    private int maxYear = 0;
+    private int minYear = 1990;
+    private ArrayList<String> yearArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +72,8 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
 
     private void initialize() {
         context = PaymentModeRegistrationTwo.this;
+        DetectNetwork.setmContext(context);
+
         Button btnLogin = (Button) findViewById(R.id.btnLogin);
 
         ImageView imgYearOfMake = (ImageView) findViewById(R.id.imgYear);
@@ -79,30 +87,45 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
         branch = (EditText)findViewById(R.id.branch);
         location = (EditText)findViewById(R.id.location);
 
+        final Calendar c = Calendar.getInstance();
+        maxYear = c.get(Calendar.YEAR);
+        for(int i=minYear;i<=maxYear;i++){
+            yearArray.add(String.valueOf(i));
+        }
+
         btnLogin.setOnClickListener(this);
         imgYearOfMake.setOnClickListener(this);
         imgMake.setOnClickListener(this);
         imgModel.setOnClickListener(this);
+
+
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.btnLogin){
-            if(isValid()){
-                formModel.setMakeYear(yearOfMake.getText().toString());
-                formModel.setBranch(branch.getText().toString());
-                formModel.setLocation(location.getText().toString());
-                formModel.setMake(txtMake.getText().toString());
-                formModel.setModel(txtModel.getText().toString());
+
+            if(DetectNetwork.isConnected()){
+                if(isValid()){
+                    formModel.setMakeYear(yearOfMake.getText().toString());
+                    formModel.setBranch(branch.getText().toString());
+                    formModel.setLocation(location.getText().toString());
+                    formModel.setMake(txtMake.getText().toString());
+                    formModel.setModel(txtModel.getText().toString());
 
 
-                progress = new ProgressDialog(context);
-                progress.setMessage("Creating Insurance Policy...");
-                progress.show();
-                progress.setCanceledOnTouchOutside(true);
+                    progress = new ProgressDialog(context);
+                    progress.setMessage("Creating Insurance Policy...");
+                    progress.show();
+                    progress.setCanceledOnTouchOutside(true);
 
-                JsonRequestManager.getInstance(this).thirdPartyInsurance(getResources().getString(R.string.base_url) + getResources().getString(R.string.third_party_submit_url), formModel, callback);
+                    JsonRequestManager.getInstance(this).thirdPartyInsurance(getResources().getString(R.string.base_url) + getResources().getString(R.string.third_party_submit_url), formModel, callback);
+                }
+            }else{
+                alertDialog = notifications.showNetworkNotification(this);
+                alertDialog.show();
             }
+
         }else if(v.getId()==R.id.imgYear || v.getId()==R.id.imgMake || v.getId()==R.id.imgModel){
             alertDialog = showCustomDialog(v.getId());
             alertDialog.show();
@@ -129,7 +152,7 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
                 if(formSubmitResponse.getResults().getStatus().equalsIgnoreCase("0")){
                     alertDialog = notifications.showGeneralDialog(context,formSubmitResponse.getResults().getError().getText());
                 }else{
-                    alertDialog = notifications.showGeneralDialog(context,"New insurance policy added successfully.\nYour reference number is "+formSubmitResponse.getResults().getReference());
+                    alertDialog = notifications.insurancePolicySuccessAlert(context,"New insurance policy added successfully.\nYour reference number is "+formSubmitResponse.getResults().getReference());
                 }
 
                 alertDialog.show();
@@ -161,10 +184,11 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
         if(id == R.id.imgYear){
+            final CharSequence[] yearArrayList = yearArray.toArray(new CharSequence[yearArray.size()]);
             builder.setTitle("Select Year of Make")
-                    .setItems(R.array.make_year_array, new DialogInterface.OnClickListener() {
+                    .setItems(yearArrayList, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            yearOfMake.setTextColor(AppController.getColor(context));
+                            yearOfMake.setTextColor(AppController.getColor(context,com.ceylinco.ceylincocustomerapp.R.color.colorPrimaryDark));
                             String[] yearArray = context.getResources().getStringArray(R.array.make_year_array);
                             yearOfMake.setText(yearArray[which]);
                             yearOfMake.setError(null);
@@ -175,9 +199,10 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
             builder.setTitle("Select Vehicle Make")
                     .setItems(vehicleMakeList, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            txtMake.setTextColor(AppController.getColor(context));
+                            txtMake.setTextColor(AppController.getColor(context,com.ceylinco.ceylincocustomerapp.R.color.colorPrimaryDark));
                             txtMake.setText(vehicleMakeList[which]);
-                            txtModel.setText(null);
+                            txtModel.setTextColor(AppController.getColor(context, R.color.textHintColor));
+                            txtModel.setText("Model");
                             txtMake.setError(null);
                         }
                     });
@@ -186,7 +211,7 @@ public class PaymentModeRegistrationTwo extends AppCompatActivity implements Vie
             builder.setTitle("Select Vehicle Model")
                     .setItems(vehicleModelList, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            txtModel.setTextColor(AppController.getColor(context));
+                            txtModel.setTextColor(AppController.getColor(context,com.ceylinco.ceylincocustomerapp.R.color.colorPrimaryDark));
                             txtModel.setText(vehicleModelList[which]);
                             txtModel.setError(null);
                         }

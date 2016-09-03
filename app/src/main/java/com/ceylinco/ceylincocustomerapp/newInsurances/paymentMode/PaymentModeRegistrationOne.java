@@ -92,7 +92,7 @@ public class PaymentModeRegistrationOne extends AppCompatActivity implements Vie
             builder.setTitle("Select Registration Type")
             .setItems(R.array.reg_types, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    regType.setTextColor(AppController.getColor(PaymentModeRegistrationOne.this));
+                    regType.setTextColor(AppController.getColor(PaymentModeRegistrationOne.this,com.ceylinco.ceylincocustomerapp.R.color.colorPrimaryDark));
                     if(which==0){
                         regType.setText("Registered");
                     }else{

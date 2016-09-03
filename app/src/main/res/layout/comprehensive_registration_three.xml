@@ -7,47 +7,12 @@
     android:layout_margin="@dimen/activity_horizontal_margin">
 
     <LinearLayout
-        android:id="@+id/layoutPurchaseDate"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:weightSum="1"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/purchaseDateTextview"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.85"
-            style="@style/AppTextView"
-            android:gravity="center_vertical"
-            android:text="@string/purchase_date"
-            android:paddingLeft="@dimen/activity_horizontal_margin"/>
-
-        <ImageView
-            android:id="@+id/imgPurchaseDate"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.15"
-            android:background="@color/spinner_color"
-            android:padding="@dimen/standard_space"
-            android:src="@drawable/ic_down"/>
-
-    </LinearLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/standard_space" />
-
-    <LinearLayout
         android:id="@+id/layoutFirstRegDate"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:weightSum="1"
-        android:visibility="gone">
+        android:weightSum="1">
 
         <TextView
             android:id="@+id/firstRegistrationTextview"
@@ -77,6 +42,57 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/branch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/AppEditText"
+            android:gravity="center_vertical"
+            android:hint="@string/preferred_branch"
+            android:textSize="16sp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/location"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/AppEditText"
+            android:gravity="center_vertical"
+            android:hint="@string/location"
+            android:textSize="16sp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_space" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="4"
         android:orientation="vertical"
         android:weightSum="1">
@@ -94,7 +110,6 @@
         <CheckBox
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:text="@string/flood_cover"
             android:textColor="@color/textColorPrimary"/>
 
@@ -107,7 +122,6 @@
         <CheckBox
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:text="@string/no_claim_bonus"
             android:textColor="@color/textColorPrimary"/>
 
@@ -125,7 +139,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         style="@style/AppButton"
-        android:text="@string/log_in"/>
+        android:text="@string/submit"/>
 
 
 
