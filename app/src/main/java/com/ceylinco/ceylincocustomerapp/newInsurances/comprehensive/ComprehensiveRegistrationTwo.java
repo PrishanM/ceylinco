@@ -125,8 +125,7 @@ public class ComprehensiveRegistrationTwo extends AppCompatActivity implements V
                     .setItems(yearArrayList, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             yearOfMake.setTextColor(AppController.getColor(context,com.ceylinco.ceylincocustomerapp.R.color.colorPrimaryDark));
-                            String[] yearArray = context.getResources().getStringArray(R.array.make_year_array);
-                            yearOfMake.setText(yearArray[which]);
+                            yearOfMake.setText(yearArray.get(which));
                             yearOfMake.setError(null);
                         }
                     });
@@ -143,15 +142,18 @@ public class ComprehensiveRegistrationTwo extends AppCompatActivity implements V
                         }
                     });
         }else if(id==R.id.imgModel){
-            final CharSequence[] vehicleModelList = AppController.getListHashMap().get(vehicleMake.getText().toString()).toArray(new CharSequence[AppController.getListHashMap().get(vehicleMake.getText().toString()).size()]);
-            builder.setTitle("Select Vehicle Model")
-                    .setItems(vehicleModelList, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            vehicleModel.setTextColor(AppController.getColor(context,com.ceylinco.ceylincocustomerapp.R.color.colorPrimaryDark));
-                            vehicleModel.setText(vehicleModelList[which]);
-                            vehicleModel.setError(null);
-                        }
-                    });
+            if(!vehicleMake.getText().toString().equalsIgnoreCase("Make")){
+                final CharSequence[] vehicleModelList = AppController.getListHashMap().get(vehicleMake.getText().toString()).toArray(new CharSequence[AppController.getListHashMap().get(vehicleMake.getText().toString()).size()]);
+                builder.setTitle("Select Vehicle Model")
+                        .setItems(vehicleModelList, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                vehicleModel.setTextColor(AppController.getColor(context,com.ceylinco.ceylincocustomerapp.R.color.colorPrimaryDark));
+                                vehicleModel.setText(vehicleModelList[which]);
+                                vehicleModel.setError(null);
+                            }
+                        });
+            }
+
         }
 
 

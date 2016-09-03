@@ -83,49 +83,6 @@
         <item>Unregistered</item>
     </string-array>
 
-    <string-array name="make_year_array">
-        <item>1990</item>
-        <item>1991</item>
-        <item>1992</item>
-        <item>1993</item>
-        <item>1994</item>
-        <item>1995</item>
-        <item>1996</item>
-        <item>1997</item>
-        <item>1998</item>
-        <item>1999</item>
-        <item>2000</item>
-        <item>2001</item>
-        <item>2002</item>
-        <item>2003</item>
-        <item>2004</item>
-        <item>2005</item>
-        <item>2006</item>
-        <item>2007</item>
-        <item>2008</item>
-        <item>2009</item>
-        <item>2010</item>
-        <item>2011</item>
-        <item>2012</item>
-        <item>2013</item>
-        <item>2014</item>
-        <item>2015</item>
-        <item>2016</item>
-    </string-array>
-
-    <string-array name="make_array">
-        <item>Honda</item>
-        <item>Toyota</item>
-        <item>Nissan</item>
-    </string-array>
-
-    <string-array name="model_array">
-        <item>123</item>
-        <item>234</item>
-        <item>345</item>
-    </string-array>
-
-
     <!-- Existing policy - Login -->
     <string name="user_name">Username</string>
     <string name="user_password">Password</string>
@@ -133,6 +90,8 @@
     <string name="register">Register</string>
     <string name="policy_number">Policy Number</string>
     <string name="select_vehicle_title">Select Vehicle</string>
+    <string name="required_username">User name required</string>
+    <string name="required_password">Password required</string>
 
 
     <!-- Selected Vehicle Policy -->
@@ -169,5 +128,6 @@
     <string name="vehicle_make_model">get_vehicle_params.aspx</string>
     <string name="third_party_submit_url">submit_form_data_thirdparty.aspx</string>
     <string name="comprehensive_submit_url">submit_form_data_comprehensive.aspx</string>
+    <string name="login_url">login.aspx</string>
 
 </resources>

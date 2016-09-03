@@ -114,7 +114,7 @@ public class ComprehensiveRegistrationThree extends AppCompatActivity implements
     }
 
     /**
-     * Callback to handle thirdparty form data submit request
+     * Callback to handle comprehensive form data submit request
      */
     private final JsonRequestManager.comprehensiveInsuranceRequest callback = new JsonRequestManager.comprehensiveInsuranceRequest() {
         @Override
@@ -123,7 +123,7 @@ public class ComprehensiveRegistrationThree extends AppCompatActivity implements
                 progress.dismiss();
             }
 
-            String APPLICATION_TAG = "THIRD PARTY POLICY";
+            String APPLICATION_TAG = "COMPREHENSIVE POLICY";
             try {
 
                 ObjectMapper mapper = new ObjectMapper();
