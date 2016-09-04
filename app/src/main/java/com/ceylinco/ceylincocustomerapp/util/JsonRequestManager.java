@@ -379,5 +379,68 @@ public class JsonRequestManager {
 
 	/******************************************************************************************************************************************/
 
+	/*
+	 * Get User Policies
+	 * */
+
+	public interface getPoliciesRequest {
+		void onSuccess(String s);
+
+		void onError(String status);
+	}
+
+	public void getPolicies(String url, final String userName, final getPoliciesRequest callback) {
+
+
+		StringRequest req = new StringRequest(Request.Method.POST, url,
+				new Response.Listener<String>() {
+					@Override
+					public void onResponse(String response) {
+						Log.d("xxxxyy",response.toString());
+						try {
+							callback.onSuccess(response.toString());
+						} catch (Exception e) {
+							Log.d("xxxxyy",e.getMessage());
+							callback.onError("Error occurred");
+						}
+					}
+				}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError volleyError) {
+				callback.onError(VolleyErrorHelper.getMessage(volleyError,
+						mCtx));
+			}
+		}){
+
+			@Override
+			public String getBodyContentType() {
+				return "application/x-www-form-urlencoded; charset=UTF-8";
+			}
+
+			@Override
+			protected Map<String, String> getParams() throws AuthFailureError {
+				Map<String, String> params = new HashMap<>();
+				params.put("uname", userName);
+				return params;
+			}
+
+		};
+
+
+		req.setRetryPolicy(new DefaultRetryPolicy(30000,
+				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+		// Adding request to request queue
+		String tag_json_arry = "json_array_req";
+		AppController.getInstance().addToRequestQueue(req,
+				tag_json_arry);
+
+	}
+
+	/******************************************************************************************************************************************/
+
+
+
 
 }

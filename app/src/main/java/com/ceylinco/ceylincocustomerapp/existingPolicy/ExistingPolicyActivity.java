@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.ceylinco.ceylincocustomerapp.MainActivity;
 import com.ceylinco.ceylincocustomerapp.R;
 import com.ceylinco.ceylincocustomerapp.models.LoginResponse;
 import com.ceylinco.ceylincocustomerapp.util.DetectNetwork;
@@ -110,6 +112,13 @@ public class ExistingPolicyActivity extends AppCompatActivity implements View.On
                     alertDialog = notifications.showGeneralDialog(context,loginResponse.getResults().getError().getText());
                     alertDialog.show();
                 }else{
+                    //Shared Pref
+                    SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.shared_pref_key), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString(getString(R.string.user_name), userName.getText().toString());
+                    editor.putString(getString(R.string.user_password), password.getText().toString());
+                    editor.commit();
+
                     Intent selectVehicleIntent = new Intent(ExistingPolicyActivity.this,SelectVehicleActivity.class);
                     startActivity(selectVehicleIntent);
                 }
@@ -152,5 +161,11 @@ public class ExistingPolicyActivity extends AppCompatActivity implements View.On
 
         return isValidInput;
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(context, MainActivity.class);
+        startActivity(intent);
     }
 }

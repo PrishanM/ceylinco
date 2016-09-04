@@ -5,10 +5,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.provider.Settings;
 
 import com.ceylinco.ceylincocustomerapp.MainActivity;
 import com.ceylinco.ceylincocustomerapp.R;
+import com.ceylinco.ceylincocustomerapp.existingPolicy.ExistingPolicyActivity;
 
 /**
  * @author Prishanm
@@ -76,6 +78,30 @@ public class Notifications {
             public void onClick(DialogInterface dialog, int id) {
                 Intent intent = new Intent(context, MainActivity.class);
                 context.startActivity(intent);
+            }
+        });
+
+        return builder.create();
+    }
+
+    public AlertDialog logoutDialog(final Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Are you sure want to logout?");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                SharedPreferences pref = context.getSharedPreferences(context.getResources().getString(R.string.shared_pref_key), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.clear();
+                editor.commit();
+                Intent mainActivity = new Intent(context, ExistingPolicyActivity.class);
+                context.startActivity(mainActivity);
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
             }
         });
 

@@ -25,6 +25,8 @@ public class Results {
     private String reference;
     @JsonProperty("error")
     private Error error;
+    @JsonProperty("policy")
+    private Policy policy;
     @JsonIgnore
     private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -86,6 +88,26 @@ public class Results {
     @JsonProperty("error")
     public void setError(Error error) {
         this.error = error;
+    }
+
+    /**
+     *
+     * @return
+     *     The policy
+     */
+    @JsonProperty("policy")
+    public Policy getPolicy() {
+        return policy;
+    }
+
+    /**
+     *
+     * @param policy
+     *     The policy
+     */
+    @JsonProperty("policy")
+    public void setPolicy(Policy policy) {
+        this.policy = policy;
     }
 
     @JsonAnyGetter

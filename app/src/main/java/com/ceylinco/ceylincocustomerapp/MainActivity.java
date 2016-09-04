@@ -1,6 +1,8 @@
 package com.ceylinco.ceylincocustomerapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ceylinco.ceylincocustomerapp.existingPolicy.ExistingPolicyActivity;
+import com.ceylinco.ceylincocustomerapp.existingPolicy.SelectVehicleActivity;
 import com.ceylinco.ceylincocustomerapp.inquiries.InquiryActivity;
 import com.ceylinco.ceylincocustomerapp.newInsurances.NewInsuranceVehicleListActivity;
 
@@ -56,8 +59,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent newInsurance = new Intent(MainActivity.this,NewInsuranceVehicleListActivity.class);
             startActivity(newInsurance);
         }else if(v.getId()==R.id.idExistingInsurance){
-            Intent existingInsurance = new Intent(MainActivity.this,ExistingPolicyActivity.class);
-            startActivity(existingInsurance);
+
+            SharedPreferences sharedPref = getSharedPreferences(getString(R.string.shared_pref_key), Context.MODE_PRIVATE);
+            String userName = sharedPref.getString(getString(R.string.user_name), "");
+            String password = sharedPref.getString(getString(R.string.user_password), "");
+
+            if(userName!=null && !userName.isEmpty() && password!=null && !password.isEmpty()){
+                Intent existingInsurance = new Intent(MainActivity.this,SelectVehicleActivity.class);
+                startActivity(existingInsurance);
+            }else {
+                Intent existingInsurance = new Intent(MainActivity.this,ExistingPolicyActivity.class);
+                startActivity(existingInsurance);
+            }
+
         }else if(v.getId()==R.id.idInquiries){
             Intent inquiryInsurance = new Intent(MainActivity.this,InquiryActivity.class);
             startActivity(inquiryInsurance);

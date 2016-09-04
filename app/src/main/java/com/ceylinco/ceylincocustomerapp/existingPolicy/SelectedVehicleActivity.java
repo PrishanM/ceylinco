@@ -1,18 +1,23 @@
 package com.ceylinco.ceylincocustomerapp.existingPolicy;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ceylinco.ceylincocustomerapp.existingPolicy.accidents.ReportAccidentsActivity;
-import com.ceylinco.ceylincocustomerapp.existingPolicy.policyDetails.PolicyDetailsActivity;
 import com.ceylinco.ceylincocustomerapp.R;
+import com.ceylinco.ceylincocustomerapp.existingPolicy.accidents.ReportAccidentsActivity;
 import com.ceylinco.ceylincocustomerapp.existingPolicy.claims.StatusOfClaimsActivity;
+import com.ceylinco.ceylincocustomerapp.existingPolicy.policyDetails.PolicyDetailsActivity;
+import com.ceylinco.ceylincocustomerapp.util.Notifications;
 
 /**
  * Created by Prishan Maduka on 7/24/2016.
@@ -22,6 +27,10 @@ public class SelectedVehicleActivity extends AppCompatActivity implements View.O
     private ImageView statusOfClaims;
     private ImageView policyDetails;
     private ImageView vvipAccidents;
+
+    private AlertDialog alertDialog;
+    private final Notifications notifications = new Notifications();
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +44,7 @@ public class SelectedVehicleActivity extends AppCompatActivity implements View.O
                 ActionBar.LayoutParams.MATCH_PARENT,
                 Gravity.CENTER);
         TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.mytext);
-        textviewTitle.setText("WPCAC1010");
+        textviewTitle.setText(getIntent().getStringExtra("VEHICLE"));
         abar.setCustomView(viewActionBar, params);
         abar.setDisplayShowCustomEnabled(true);
         abar.setDisplayShowTitleEnabled(false);
@@ -46,6 +55,8 @@ public class SelectedVehicleActivity extends AppCompatActivity implements View.O
     }
 
     private void initialize() {
+
+        context = SelectedVehicleActivity.this;
 
         statusOfClaims = (ImageView)findViewById(R.id.idStatusOfClaims);
         policyDetails = (ImageView)findViewById(R.id.idPolicyDetails);
@@ -67,6 +78,23 @@ public class SelectedVehicleActivity extends AppCompatActivity implements View.O
         }else if(v.getId()==R.id.idVVIPAccidents){
             Intent accidentsIntent = new Intent(SelectedVehicleActivity.this,ReportAccidentsActivity.class);
             startActivity(accidentsIntent);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.action_logout){
+            alertDialog = notifications.logoutDialog(context);
+            alertDialog.show();
+            return true;
+        }else{
+            return super.onOptionsItemSelected(item);
         }
     }
 }

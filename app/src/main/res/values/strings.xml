@@ -5,6 +5,7 @@
     <string name="permission_required_toast">Location permission is required.</string>
     <string name="permission_rationale_location">Access to the location services is required.</string>
     <string name="server_key">AIzaSyButHF3_gy4QWL6lQMDvbT3xEc3PZ82kZ8</string>
+    <string name="shared_pref_key">CEYLINCOSHAREDPREF</string>
 
     <!-- Select option screen -->
     <string name="option_menu_message">Select an Option</string>
@@ -129,5 +130,6 @@
     <string name="third_party_submit_url">submit_form_data_thirdparty.aspx</string>
     <string name="comprehensive_submit_url">submit_form_data_comprehensive.aspx</string>
     <string name="login_url">login.aspx</string>
+    <string name="get_user_policies_url">get_user_policies.aspx</string>
 
 </resources>
