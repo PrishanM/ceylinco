@@ -69,6 +69,7 @@ public class ExistingPolicyActivity extends AppCompatActivity implements View.On
         password = (EditText)findViewById(R.id.password);
 
         btnLogin = (Button)findViewById(R.id.btnLogin);
+        btnForgotPassword = (Button)findViewById(R.id.forgootPassword);
 
         btnLogin.setOnClickListener(this);
     }
@@ -89,6 +90,8 @@ public class ExistingPolicyActivity extends AppCompatActivity implements View.On
                 alertDialog = notifications.showNetworkNotification(this);
                 alertDialog.show();
             }
+        }else if(v.getId()==R.id.forgootPassword){
+
         }
     }
 
