@@ -32,6 +32,8 @@ public class SelectedVehicleActivity extends AppCompatActivity implements View.O
     private final Notifications notifications = new Notifications();
     private Context context;
 
+    private String policyNumber,vehicleNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,9 @@ public class SelectedVehicleActivity extends AppCompatActivity implements View.O
         abar.setDisplayShowTitleEnabled(false);
         abar.setDisplayHomeAsUpEnabled(true);
         abar.setHomeButtonEnabled(true);
+
+        policyNumber = getIntent().getStringExtra("POLICY");
+        vehicleNumber = getIntent().getStringExtra("VEHICLE");
 
         initialize();
     }
@@ -71,9 +76,13 @@ public class SelectedVehicleActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         if(v.getId()==R.id.idStatusOfClaims){
             Intent claimsIntent = new Intent(SelectedVehicleActivity.this,StatusOfClaimsActivity.class);
+            claimsIntent.putExtra("VEHICLE",vehicleNumber);
+            claimsIntent.putExtra("POLICY",policyNumber);
             startActivity(claimsIntent);
         }else if(v.getId()==R.id.idPolicyDetails){
             Intent policyDetailsIntent = new Intent(SelectedVehicleActivity.this,PolicyDetailsActivity.class);
+            policyDetailsIntent.putExtra("VEHICLE",vehicleNumber);
+            policyDetailsIntent.putExtra("POLICY",policyNumber);
             startActivity(policyDetailsIntent);
         }else if(v.getId()==R.id.idVVIPAccidents){
             Intent accidentsIntent = new Intent(SelectedVehicleActivity.this,ReportAccidentsActivity.class);

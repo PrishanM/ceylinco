@@ -87,7 +87,7 @@ public class Notifications {
     public AlertDialog logoutDialog(final Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage("Are you sure want to logout?");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Log out", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 SharedPreferences pref = context.getSharedPreferences(context.getResources().getString(R.string.shared_pref_key), Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();

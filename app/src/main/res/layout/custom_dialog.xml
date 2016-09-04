@@ -4,18 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/pop_up_background_color">
+    android:background="@color/pop_up_background_color"
+    android:layout_margin="10dp">
 
     <TextView
+        android:id="@+id/txtClaimDate"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="11-MAR-2015"
+        android:textStyle="bold"
         android:padding="@dimen/activity_horizontal_margin"
+        android:gravity="center"
         android:textColor="@color/colorPrimary"/>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="@color/colorPrimary"/>
 
     <LinearLayout
@@ -27,11 +30,11 @@
         android:gravity="center">
 
         <ImageView
+            android:id="@+id/imgApprovedStatus"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-            android:padding="@dimen/activity_horizontal_margin"
-            android:src="@drawable/success"/>
+            android:padding="@dimen/activity_horizontal_margin"/>
 
 
         <LinearLayout
@@ -43,12 +46,14 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/txtApproved"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Approved | 12000"
                 android:textColor="@color/colorPrimary"/>
 
             <TextView
+                android:id="@+id/txtRemark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
@@ -60,7 +65,7 @@
 
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/txtTel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary"

@@ -82,8 +82,6 @@ public class SelectVehicleActivity extends AppCompatActivity implements View.OnC
                 progress.setCanceledOnTouchOutside(true);
 
                 JsonRequestManager.getInstance(this).getPolicies(getResources().getString(R.string.base_url) + getResources().getString(R.string.get_user_policies_url), userName, callback);
-            }else{
-
             }
         }else{
             alertDialog = notifications.showNetworkNotification(this);
@@ -97,10 +95,9 @@ public class SelectVehicleActivity extends AppCompatActivity implements View.OnC
             if(isValid()){
                 Intent intent = new Intent(SelectVehicleActivity.this,SelectedVehicleActivity.class);
                 intent.putExtra("VEHICLE",vehicleNumber.getText().toString());
+                intent.putExtra("POLICY",policyNumber.getText().toString());
                 startActivity(intent);
             }
-
-
         }
     }
 

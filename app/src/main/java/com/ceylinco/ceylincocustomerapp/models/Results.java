@@ -8,14 +8,19 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.ALWAYS)
 @JsonPropertyOrder({
     "status",
     "reference",
-    "error"
+    "error",
+        "policy",
+        "claim",
+        "data"
 })
 public class Results {
 
@@ -27,6 +32,10 @@ public class Results {
     private Error error;
     @JsonProperty("policy")
     private Policy policy;
+    @JsonProperty("claim")
+    private List<Claim> claim = new ArrayList<Claim>();
+    @JsonProperty("data")
+    private Data data;
     @JsonIgnore
     private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -108,6 +117,46 @@ public class Results {
     @JsonProperty("policy")
     public void setPolicy(Policy policy) {
         this.policy = policy;
+    }
+
+    /**
+     *
+     * @return
+     *     The claim
+     */
+    @JsonProperty("claim")
+    public List<Claim> getClaim() {
+        return claim;
+    }
+
+    /**
+     *
+     * @param claim
+     *     The claim
+     */
+    @JsonProperty("claim")
+    public void setClaim(List<Claim> claim) {
+        this.claim = claim;
+    }
+
+    /**
+     *
+     * @return
+     *     The data
+     */
+    @JsonProperty("data")
+    public Data getData() {
+        return data;
+    }
+
+    /**
+     *
+     * @param data
+     *     The data
+     */
+    @JsonProperty("data")
+    public void setData(Data data) {
+        this.data = data;
     }
 
     @JsonAnyGetter

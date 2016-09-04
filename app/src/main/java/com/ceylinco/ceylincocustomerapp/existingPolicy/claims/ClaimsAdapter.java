@@ -7,24 +7,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ceylinco.ceylincocustomerapp.R;
+import com.ceylinco.ceylincocustomerapp.models.Claim;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Prishanm
- * Used for Listview in MORE SHOPS
+ * Used for Listview in Claims
  */
 class ClaimsAdapter extends BaseAdapter{
 
     private final Context con;
+    private ArrayList<Claim> claims;
 
-    public ClaimsAdapter(Context context){
+    public ClaimsAdapter(Context context, List<Claim> claimList){
         this.con = context;
+        this.claims = new ArrayList<>(claimList);
     }
 
     @Override
     public int getCount() {
-        return 15;
+        return claims.size();
     }
 
     @Override
@@ -54,11 +61,11 @@ class ClaimsAdapter extends BaseAdapter{
         }else{
             layout.setBackgroundResource(R.color.list_view_odd_color);
         }
+        final TextView txtDate = (TextView)convertView.findViewById(R.id.txtDate);
+        final TextView txtRefNo = (TextView)convertView.findViewById(R.id.txtRefNo);
 
-        /*final ImageView img1 = (ImageView)convertView.findViewById(R.id.imgView1);
-        final TextView txtShopName = (TextView)convertView.findViewById(R.id.txtShopName);
-        final TextView txtShopSlogan = (TextView)convertView.findViewById(R.id.txtShopSlogan);*/
-
+        txtDate.setText(claims.get(position).getDate());
+        txtRefNo.setText(claims.get(position).getRef());
 
 
         return convertView;

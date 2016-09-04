@@ -19,22 +19,22 @@
             android:weightSum="1">
 
             <TextView
+                android:id="@+id/txtDate"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.5"
                 android:gravity="bottom"
-                style="@style/BaseTextMedium"
-                android:text="11-MAR-2015"/>
+                style="@style/BaseTextMedium"/>
 
             <TextView
+                android:id="@+id/txtRefNo"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.5"
                 android:gravity="top"
-                style="@style/BaseTextSmall"
-                android:text="OKE37203742037407"/>
+                style="@style/BaseTextSmall"/>
 
         </LinearLayout>
 
