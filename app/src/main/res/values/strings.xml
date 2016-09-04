@@ -133,5 +133,6 @@
     <string name="get_user_policies_url">get_user_policies.aspx</string>
     <string name="get_claims_url">get_claims.aspx</string>
     <string name="get_single_claim_url">get_claim_data.aspx</string>
+    <string name="get_policy_details_url">get_policy_data.aspx</string>
 
 </resources>
