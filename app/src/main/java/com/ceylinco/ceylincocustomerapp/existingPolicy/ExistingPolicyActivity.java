@@ -3,6 +3,7 @@ package com.ceylinco.ceylincocustomerapp.existingPolicy;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,10 +20,12 @@ import android.widget.TextView;
 
 import com.ceylinco.ceylincocustomerapp.MainActivity;
 import com.ceylinco.ceylincocustomerapp.R;
+import com.ceylinco.ceylincocustomerapp.models.FormSubmitResponse;
 import com.ceylinco.ceylincocustomerapp.models.LoginResponse;
 import com.ceylinco.ceylincocustomerapp.util.DetectNetwork;
 import com.ceylinco.ceylincocustomerapp.util.JsonRequestManager;
 import com.ceylinco.ceylincocustomerapp.util.Notifications;
+import com.ceylinco.ceylincocustomerapp.util.Validator;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -72,6 +76,7 @@ public class ExistingPolicyActivity extends AppCompatActivity implements View.On
         btnForgotPassword = (Button)findViewById(R.id.forgootPassword);
 
         btnLogin.setOnClickListener(this);
+        btnForgotPassword.setOnClickListener(this);
     }
 
     @Override
@@ -91,7 +96,44 @@ public class ExistingPolicyActivity extends AppCompatActivity implements View.On
                 alertDialog.show();
             }
         }else if(v.getId()==R.id.forgootPassword){
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(getString(R.string.forgot_password)+" - Password Reset");
+            View viewInflated = LayoutInflater.from(context).inflate(R.layout.forgot_password_layout, null);
+            final EditText input = (EditText) viewInflated.findViewById(R.id.input);
+            builder.setView(viewInflated);
 
+            // Set up the buttons
+            builder.setPositiveButton("Send", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    Validator validator = new Validator();
+                    if(input.getText()!=null && !input.getText().toString().isEmpty()){
+                        if(validator.isValidNic(input.getText().toString())) {
+                            progress = new ProgressDialog(context);
+                            progress.setMessage("Sending message...");
+                            progress.show();
+                            progress.setCanceledOnTouchOutside(true);
+                            JsonRequestManager.getInstance(context).resetPassword(getResources().getString(R.string.base_url) + getResources().getString(R.string.forgot_password_details_url), input.getText().toString(), resetCallback);
+                        }else {
+                            alertDialog = notifications.showGeneralDialog(context,"Invalid NIC");
+                            alertDialog.show();
+                        }
+                    }else{
+                        alertDialog = notifications.showGeneralDialog(context,"Empty NIC value");
+                        alertDialog.show();
+                    }
+
+                }
+            });
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.show();
         }
     }
 
@@ -181,4 +223,55 @@ public class ExistingPolicyActivity extends AppCompatActivity implements View.On
         }
         return false;
     }
+
+    /**
+     * Callback to handle resetting password - send nic request
+     */
+    private final JsonRequestManager.resetPasswordRequest resetCallback = new JsonRequestManager.resetPasswordRequest() {
+        @Override
+        public void onSuccess(String response) {
+            if(progress!=null){
+                progress.dismiss();
+            }
+
+            String APPLICATION_TAG = "SENDING NIC";
+            try {
+
+                ObjectMapper mapper = new ObjectMapper();
+
+                FormSubmitResponse formSubmitResponse = mapper.readValue(response, FormSubmitResponse.class);
+                String message;
+
+                if(formSubmitResponse.getResults().getStatus().equalsIgnoreCase("2")){
+                    message = "You will receive your user name & password in sms";
+                }else{
+                    message = formSubmitResponse.getResults().getError().getText();
+                }
+
+                alertDialog = notifications.showGeneralDialog(context,message);
+                alertDialog.show();
+
+            }catch (JsonParseException e) {
+                e.printStackTrace();
+                Log.d(APPLICATION_TAG,e.getMessage());
+            } catch (JsonMappingException e) {
+                e.printStackTrace();
+                Log.d(APPLICATION_TAG,e.getMessage());
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.d(APPLICATION_TAG,e.getMessage());
+            }
+
+        }
+
+        @Override
+        public void onError(String response) {
+            if(progress!=null){
+                progress.dismiss();
+            }
+            alertDialog = notifications.showGeneralDialog(context,response);
+            alertDialog.show();
+        }
+    };
+
 }

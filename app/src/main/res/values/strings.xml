@@ -134,5 +134,6 @@
     <string name="get_claims_url">get_claims.aspx</string>
     <string name="get_single_claim_url">get_claim_data.aspx</string>
     <string name="get_policy_details_url">get_policy_data.aspx</string>
+    <string name="forgot_password_details_url">user_forgot_password_submit.aspx</string>
 
 </resources>

@@ -15,39 +15,47 @@ import java.util.List;
  * Created by Prishan Maduka on 7/11/2016.
  */
 public class SplashActivity extends Activity {
-    private final List<String> permissionList = new ArrayList<String>();
+    private static int SPLASH_TIMEOUT_TIME = 3000;
+    int cameraState = 0,locationServicesState=0,locationCoarseState=0,storageAccess=0,phoneState = 0;
+    private static int REQUEST_CODE = 1100;
+    private List<String> permissionList = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_layout);
 
+
+
         //Check for Runtime Permissions
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
             startHandler();
         }else{
-            int cameraState = checkSelfPermission(Manifest.permission.CAMERA);
-            int locationServicesState = checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION);
-            int locationCoarseState = checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION);
-            int storageState = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            phoneState = checkSelfPermission(Manifest.permission.READ_PHONE_STATE); // Permission to call
+            cameraState = checkSelfPermission(Manifest.permission.CAMERA); // Permission to capture images
+            locationServicesState = checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION); // Permission for location services
+            locationCoarseState = checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION); // Permission for location services
+            storageAccess = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE); // Permission for location services
 
-            if(cameraState != PackageManager.PERMISSION_GRANTED){
+            if(phoneState!=PackageManager.PERMISSION_GRANTED){
+                permissionList.add(Manifest.permission.READ_PHONE_STATE);
+            }
+            if(cameraState!=PackageManager.PERMISSION_GRANTED){
                 permissionList.add(Manifest.permission.CAMERA);
             }
-            if(locationServicesState !=PackageManager.PERMISSION_GRANTED){
+            if(locationServicesState!=PackageManager.PERMISSION_GRANTED){
                 permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
             }
-            if(locationCoarseState !=PackageManager.PERMISSION_GRANTED){
+            if(locationCoarseState!=PackageManager.PERMISSION_GRANTED){
                 permissionList.add(Manifest.permission.ACCESS_COARSE_LOCATION);
             }
-            if(storageState !=PackageManager.PERMISSION_GRANTED){
+            if(storageAccess!=PackageManager.PERMISSION_GRANTED){
                 permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
             }
 
             if (permissionList.size()>0){
                 String[] permissionArray = new String[permissionList.size()];
                 permissionList.toArray(permissionArray);
-                int REQUEST_CODE = 1100;
                 requestPermissions(permissionArray, REQUEST_CODE);
             }else{
                 startHandler();
