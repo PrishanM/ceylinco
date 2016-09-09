@@ -85,6 +85,13 @@ public class ComprehensiveRegistrationThree extends AppCompatActivity implements
         btnLogin.setOnClickListener(this);
         imgFirstReg.setOnClickListener(this);
 
+        progress = new ProgressDialog(context);
+        progress.setMessage("Loading Data...");
+        progress.show();
+        progress.setCanceledOnTouchOutside(true);
+
+        JsonRequestManager.getInstance(this).getPerils(getResources().getString(R.string.base_url) + getResources().getString(R.string.get_perils_url), formModel.getvType(),formModel.getPurpose(), perilsCallback);
+
     }
 
     @Override
@@ -206,4 +213,54 @@ public class ComprehensiveRegistrationThree extends AppCompatActivity implements
         return isValidInput;
 
     }
+
+    /**
+     * Callback to handle policy perils
+     */
+    private final JsonRequestManager.getPerilsRequest perilsCallback = new JsonRequestManager.getPerilsRequest() {
+        @Override
+        public void onSuccess(String response) {
+            if(progress!=null){
+                progress.dismiss();
+            }
+
+            String APPLICATION_TAG = "POLICY PERILS";
+            try {
+
+                ObjectMapper mapper = new ObjectMapper();
+
+                FormSubmitResponse perilResponse = mapper.readValue(response, FormSubmitResponse.class);
+                if(perilResponse.getResults().getStatus().equalsIgnoreCase("5") && perilResponse.getResults().getType()!=null){
+
+                    //alertDialog = notifications.showGeneralDialog(context,formSubmitResponse.getResults().getError().getText());
+                }else{
+                    //alertDialog = notifications.insurancePolicySuccessAlert(context,"New insurance policy added successfully.\nYour reference number is "+formSubmitResponse.getResults().getReference());
+                }
+
+                //alertDialog.show();
+
+
+
+            }catch (JsonParseException e) {
+                e.printStackTrace();
+                Log.d(APPLICATION_TAG,e.getMessage());
+            } catch (JsonMappingException e) {
+                e.printStackTrace();
+                Log.d(APPLICATION_TAG,e.getMessage());
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.d(APPLICATION_TAG,e.getMessage());
+            }
+
+        }
+
+        @Override
+        public void onError(String response) {
+            if(progress!=null){
+                progress.dismiss();
+            }
+            alertDialog = notifications.showGeneralDialog(context,response);
+            alertDialog.show();
+        }
+    };
 }

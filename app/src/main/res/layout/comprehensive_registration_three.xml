@@ -107,7 +107,15 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/standard_space" />
 
-        <CheckBox
+        <ListView
+            android:id="@+id/listPerils"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4">
+
+        </ListView>
+
+        <!--<CheckBox
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/flood_cover"
@@ -123,7 +131,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/no_claim_bonus"
-            android:textColor="@color/textColorPrimary"/>
+            android:textColor="@color/textColorPrimary"/>-->
 
 
     </LinearLayout>

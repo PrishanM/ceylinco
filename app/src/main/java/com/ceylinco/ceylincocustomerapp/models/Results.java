@@ -36,6 +36,8 @@ public class Results {
     private List<Claim> claim = new ArrayList<Claim>();
     @JsonProperty("data")
     private Data data;
+    @JsonProperty("type")
+    private List<PerilType> type = new ArrayList<PerilType>();
     @JsonIgnore
     private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -157,6 +159,26 @@ public class Results {
     @JsonProperty("data")
     public void setData(Data data) {
         this.data = data;
+    }
+
+    /**
+     *
+     * @return
+     *     The type
+     */
+    @JsonProperty("type")
+    public List<PerilType> getType() {
+        return type;
+    }
+
+    /**
+     *
+     * @param type
+     *     The type
+     */
+    @JsonProperty("type")
+    public void setType(List<PerilType> type) {
+        this.type = type;
     }
 
     @JsonAnyGetter

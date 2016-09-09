@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Ceylinco Customer App</string>
+    <!--<string name="app_name">Ceylinco Customer App</string>-->
+    <string name="app_name">Test</string>
     <string name="no_network_error">No internet connection.Please check your connection.</string>
     <string name="location_permission_denied">This requires location permission to enable your location services..</string>
     <string name="permission_required_toast">Location permission is required.</string>
@@ -135,5 +136,6 @@
     <string name="get_single_claim_url">get_claim_data.aspx</string>
     <string name="get_policy_details_url">get_policy_data.aspx</string>
     <string name="forgot_password_details_url">user_forgot_password_submit.aspx</string>
+    <string name="get_perils_url">get_product_perils.aspx</string>
 
 </resources>
