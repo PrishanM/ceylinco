@@ -31,7 +31,7 @@ public class Results {
     @JsonProperty("error")
     private Error error;
     @JsonProperty("policy")
-    private Policy policy;
+    private List<Policy> policy = new ArrayList<Policy>();
     @JsonProperty("claim")
     private List<Claim> claim = new ArrayList<Claim>();
     @JsonProperty("data")
@@ -104,20 +104,20 @@ public class Results {
     /**
      *
      * @return
-     *     The policy
+     * The policy
      */
     @JsonProperty("policy")
-    public Policy getPolicy() {
+    public List<Policy> getPolicy() {
         return policy;
     }
 
     /**
      *
      * @param policy
-     *     The policy
+     * The policy
      */
     @JsonProperty("policy")
-    public void setPolicy(Policy policy) {
+    public void setPolicy(List<Policy> policy) {
         this.policy = policy;
     }
 

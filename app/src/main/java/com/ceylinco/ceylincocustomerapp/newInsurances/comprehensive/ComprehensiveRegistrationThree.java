@@ -14,11 +14,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ceylinco.ceylincocustomerapp.R;
 import com.ceylinco.ceylincocustomerapp.models.FormSubmitResponse;
 import com.ceylinco.ceylincocustomerapp.models.NewInsuranceFormModel;
+import com.ceylinco.ceylincocustomerapp.models.PerilType;
+import com.ceylinco.ceylincocustomerapp.util.AppController;
 import com.ceylinco.ceylincocustomerapp.util.DatePickerCustom;
 import com.ceylinco.ceylincocustomerapp.util.DetectNetwork;
 import com.ceylinco.ceylincocustomerapp.util.JsonRequestManager;
@@ -28,7 +31,10 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Prishan Maduka on 7/23/2016.
@@ -43,6 +49,9 @@ public class ComprehensiveRegistrationThree extends AppCompatActivity implements
     private ProgressDialog progress;
     private AlertDialog alertDialog;
     private Context context;
+    private PerilsAdapter perilsAdapter;
+    private ListView listView;
+    private List<PerilType> typeList = new ArrayList<>();
 
 
     @Override
@@ -81,6 +90,7 @@ public class ComprehensiveRegistrationThree extends AppCompatActivity implements
         branch = (EditText)findViewById(R.id.branch);
         location = (EditText)findViewById(R.id.location);
         firstRegistration = (TextView)findViewById(R.id.firstRegistrationTextview);
+        listView = (ListView)findViewById(R.id.listPerils);
 
         btnLogin.setOnClickListener(this);
         imgFirstReg.setOnClickListener(this);
@@ -103,12 +113,26 @@ public class ComprehensiveRegistrationThree extends AppCompatActivity implements
                     formModel.setLocation(location.getText().toString());
                     formModel.setFirstRegDate((firstRegistration.getText().toString().equalsIgnoreCase("Date of First Registration"))?"":firstRegistration.getText().toString());
 
+                    HashMap<Integer,Boolean> map = new HashMap<>();
+                    map = AppController.getIntegerHashMap();
+                    String peril = "";
+                    if(map.size()>0){
+                        for (int i=0;i<map.size();i++){
+                            if (map.get(i)){
+                                peril = peril + typeList.get(i).getCode() + "||";
+                            }
+                        }
+                    }
+
+                    if(peril.length()>0){
+                        peril = peril.substring(0, peril.length() - 2);
+                    }else peril=peril;
+
                     progress = new ProgressDialog(context);
                     progress.setMessage("Creating Insurance Policy...");
                     progress.show();
                     progress.setCanceledOnTouchOutside(true);
-
-                    JsonRequestManager.getInstance(this).comprehensiveInsurance(getResources().getString(R.string.base_url) + getResources().getString(R.string.comprehensive_submit_url), formModel, callback);
+                    JsonRequestManager.getInstance(this).comprehensiveInsurance(getResources().getString(R.string.base_url) + getResources().getString(R.string.comprehensive_submit_url), formModel,peril, callback);
                 }
             }else {
                 alertDialog = notifications.showNetworkNotification(this);
@@ -230,17 +254,11 @@ public class ComprehensiveRegistrationThree extends AppCompatActivity implements
                 ObjectMapper mapper = new ObjectMapper();
 
                 FormSubmitResponse perilResponse = mapper.readValue(response, FormSubmitResponse.class);
-                if(perilResponse.getResults().getStatus().equalsIgnoreCase("5") && perilResponse.getResults().getType()!=null){
-
-                    //alertDialog = notifications.showGeneralDialog(context,formSubmitResponse.getResults().getError().getText());
-                }else{
-                    //alertDialog = notifications.insurancePolicySuccessAlert(context,"New insurance policy added successfully.\nYour reference number is "+formSubmitResponse.getResults().getReference());
+                if(perilResponse.getResults().getStatus().equalsIgnoreCase("5") && perilResponse.getResults().getType()!=null && perilResponse.getResults().getType().size()>0){
+                    typeList = perilResponse.getResults().getType();
+                    perilsAdapter = new PerilsAdapter(context,typeList);
+                    listView.setAdapter(perilsAdapter);
                 }
-
-                //alertDialog.show();
-
-
-
             }catch (JsonParseException e) {
                 e.printStackTrace();
                 Log.d(APPLICATION_TAG,e.getMessage());

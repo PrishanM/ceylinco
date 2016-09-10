@@ -3,6 +3,7 @@ package com.ceylinco.ceylincocustomerapp.existingPolicy;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,10 +13,12 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ceylinco.ceylincocustomerapp.R;
 import com.ceylinco.ceylincocustomerapp.models.FormSubmitResponse;
+import com.ceylinco.ceylincocustomerapp.models.Policy;
 import com.ceylinco.ceylincocustomerapp.util.AppController;
 import com.ceylinco.ceylincocustomerapp.util.DetectNetwork;
 import com.ceylinco.ceylincocustomerapp.util.JsonRequestManager;
@@ -25,6 +28,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Prishan Maduka on 7/24/2016.
@@ -32,11 +37,14 @@ import java.io.IOException;
 public class SelectVehicleActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnNext;
+    private ImageView imageView;
     private final Notifications notifications = new Notifications();
     private ProgressDialog progress;
     private AlertDialog alertDialog;
     private Context context;
     private TextView policyNumber,vehicleNumber;
+    private ArrayList<String> policyList = new ArrayList<>();
+    private List<Policy> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +74,12 @@ public class SelectVehicleActivity extends AppCompatActivity implements View.OnC
 
         policyNumber = (TextView)findViewById(R.id.policyNumber);
         vehicleNumber = (TextView)findViewById(R.id.vehicleNumber);
+        imageView = (ImageView)findViewById(R.id.imgPolicyNo);
 
         btnNext = (Button)findViewById(R.id.btnNext);
 
         btnNext.setOnClickListener(this);
+        imageView.setOnClickListener(this);
 
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.shared_pref_key), Context.MODE_PRIVATE);
         String userName = sharedPref.getString(getString(R.string.user_name), "");
@@ -98,6 +108,9 @@ public class SelectVehicleActivity extends AppCompatActivity implements View.OnC
                 intent.putExtra("POLICY",policyNumber.getText().toString());
                 startActivity(intent);
             }
+        }else if(v.getId()==R.id.imgPolicyNo){
+            alertDialog = showCustomDialog(R.id.imgPolicyNo);
+            alertDialog.show();
         }
     }
 
@@ -122,10 +135,10 @@ public class SelectVehicleActivity extends AppCompatActivity implements View.OnC
                     alertDialog = notifications.showGeneralDialog(context,policies.getResults().getError().getText());
                     alertDialog.show();
                 }else if(policies.getResults().getStatus().equalsIgnoreCase("1")){
-                    vehicleNumber.setTextColor(AppController.getColor(context,com.ceylinco.ceylincocustomerapp.R.color.colorPrimaryDark));
-                    vehicleNumber.setText(policies.getResults().getPolicy().getVehicle());
-                    policyNumber.setTextColor(AppController.getColor(context,com.ceylinco.ceylincocustomerapp.R.color.colorPrimaryDark));
-                    policyNumber.setText(policies.getResults().getPolicy().getText());
+                    list = policies.getResults().getPolicy();
+                    for (int i=0;i<list.size();i++){
+                        policyList.add(list.get(i).getText());
+                    }
                 }
 
             }catch (JsonParseException e) {
@@ -166,5 +179,24 @@ public class SelectVehicleActivity extends AppCompatActivity implements View.OnC
 
         return isValidInput;
 
+    }
+
+    private AlertDialog showCustomDialog(int id) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        if (id == R.id.imgPolicyNo) {
+            final CharSequence[] policyArrayList = policyList.toArray(new CharSequence[policyList.size()]);
+            builder.setTitle("Select Policy")
+                    .setItems(policyArrayList, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            vehicleNumber.setTextColor(AppController.getColor(context, com.ceylinco.ceylincocustomerapp.R.color.colorPrimaryDark));
+                            policyNumber.setTextColor(AppController.getColor(context, com.ceylinco.ceylincocustomerapp.R.color.colorPrimaryDark));
+                            policyNumber.setText(policyList.get(which));
+                            vehicleNumber.setText(list.get(which).getVehicle());
+                        }
+                    });
+        }
+
+        return builder.create();
     }
 }

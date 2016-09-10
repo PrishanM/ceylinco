@@ -246,7 +246,7 @@ public class JsonRequestManager {
 		void onError(String status);
 	}
 
-	public void comprehensiveInsurance(String url, final NewInsuranceFormModel model, final comprehensiveInsuranceRequest callback) {
+	public void comprehensiveInsurance(String url, final NewInsuranceFormModel model, final String peril, final comprehensiveInsuranceRequest callback) {
 
 
 		StringRequest req = new StringRequest(Request.Method.POST, url,
@@ -298,6 +298,7 @@ public class JsonRequestManager {
 				params.put("purpose_of_use", model.getPurpose());
 				params.put("cur_meter_reading", model.getCurrMeter());
 				params.put("first_reg_date", model.getFirstRegDate());
+				params.put("perils", peril);
 				return params;
 			}
 

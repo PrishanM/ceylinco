@@ -27,6 +27,7 @@ public class AppController extends Application{
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
     public static HashMap<String,ArrayList<String>> listHashMap = null;
+    public static HashMap<Integer,Boolean> integerHashMap = new HashMap<>();
     public static ArrayList<String> vehicleMakeList = null;
 
     private static AppController mInstance;
@@ -105,5 +106,13 @@ public class AppController extends Application{
 
     public static void setListHashMap(HashMap<String, ArrayList<String>> listHashMap) {
         AppController.listHashMap = listHashMap;
+    }
+
+    public static HashMap<Integer, Boolean> getIntegerHashMap() {
+        return integerHashMap;
+    }
+
+    public static void setIntegerHashMap(HashMap<Integer, Boolean> integerHashMap) {
+        AppController.integerHashMap = integerHashMap;
     }
 }
