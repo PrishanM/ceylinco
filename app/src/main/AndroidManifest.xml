@@ -21,8 +21,7 @@
         android:theme="@style/MyMaterialTheme">
         <activity
             android:name="com.ceylinco.ceylincocustomerapp.SplashActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -198,6 +197,17 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".existingPolicy.accidents.ReportAccidentsActivity" />
+
+        </activity>
+
+        <activity
+            android:name=".existingPolicy.UserRegistrationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".existingPolicy.UserRegistrationActivity" />
 
         </activity>
 

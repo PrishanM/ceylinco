@@ -108,4 +108,17 @@ public class Notifications {
         return builder.create();
     }
 
+    public AlertDialog createSuccess(final Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("User created successfully");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Intent mainActivity = new Intent(context, ExistingPolicyActivity.class);
+                context.startActivity(mainActivity);
+            }
+        });
+
+        return builder.create();
+    }
+
 }

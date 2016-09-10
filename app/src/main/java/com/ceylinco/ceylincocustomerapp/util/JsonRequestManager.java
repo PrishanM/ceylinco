@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -730,6 +731,74 @@ public class JsonRequestManager {
 				Map<String, String> params = new HashMap<>();
 				params.put("cat", category);
 				params.put("use", use);
+				return params;
+			}
+
+		};
+
+
+		req.setRetryPolicy(new DefaultRetryPolicy(30000,
+				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+		// Adding request to request queue
+		String tag_json_arry = "json_array_req";
+		AppController.getInstance().addToRequestQueue(req,
+				tag_json_arry);
+
+	}
+
+	/******************************************************************************************************************************************/
+
+	/*
+	 * User registration
+	 * */
+
+	public interface createUserRequest {
+		void onSuccess(String s);
+
+		void onError(String status);
+	}
+
+	public void createUser(String url, final ArrayList<String> parameters, final createUserRequest callback) {
+
+
+		StringRequest req = new StringRequest(Request.Method.POST, url,
+				new Response.Listener<String>() {
+					@Override
+					public void onResponse(String response) {
+						Log.d("xxxxyy",response.toString());
+						try {
+							callback.onSuccess(response.toString());
+						} catch (Exception e) {
+							Log.d("xxxxyy",e.getMessage());
+							callback.onError("Error occurred");
+						}
+					}
+				}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError volleyError) {
+				callback.onError(VolleyErrorHelper.getMessage(volleyError,
+						mCtx));
+			}
+		}){
+
+			@Override
+			public String getBodyContentType() {
+				return "application/x-www-form-urlencoded; charset=UTF-8";
+			}
+
+			@Override
+			protected Map<String, String> getParams() throws AuthFailureError {
+				Map<String, String> params = new HashMap<>();
+				params.put("name", parameters.get(0));
+				params.put("address", parameters.get(1));
+				params.put("nic",parameters.get(2));
+				params.put("contact", parameters.get(3));
+				params.put("email", parameters.get(4));
+				params.put("uname", parameters.get(5));
+				params.put("pass", parameters.get(6));
+				params.put("pols", parameters.get(7));
 				return params;
 			}
 

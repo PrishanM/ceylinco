@@ -74,9 +74,11 @@ public class ExistingPolicyActivity extends AppCompatActivity implements View.On
 
         btnLogin = (Button)findViewById(R.id.btnLogin);
         btnForgotPassword = (Button)findViewById(R.id.forgootPassword);
+        btnRegister = (Button)findViewById(R.id.register);
 
         btnLogin.setOnClickListener(this);
         btnForgotPassword.setOnClickListener(this);
+        btnRegister.setOnClickListener(this);
     }
 
     @Override
@@ -134,6 +136,9 @@ public class ExistingPolicyActivity extends AppCompatActivity implements View.On
             });
 
             builder.show();
+        }else if(v.getId()==R.id.register){
+            Intent intent = new Intent(context,UserRegistrationActivity.class);
+            startActivity(intent);
         }
     }
 
