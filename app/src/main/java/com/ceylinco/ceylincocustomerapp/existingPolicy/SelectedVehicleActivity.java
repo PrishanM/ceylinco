@@ -86,6 +86,8 @@ public class SelectedVehicleActivity extends AppCompatActivity implements View.O
             startActivity(policyDetailsIntent);
         }else if(v.getId()==R.id.idVVIPAccidents){
             Intent accidentsIntent = new Intent(SelectedVehicleActivity.this,ReportAccidentsActivity.class);
+            accidentsIntent.putExtra("VEHICLE",vehicleNumber);
+            accidentsIntent.putExtra("POLICY",policyNumber);
             startActivity(accidentsIntent);
         }
     }

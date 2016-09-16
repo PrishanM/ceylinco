@@ -102,6 +102,8 @@
     <string name="status_of_claims">Status of Claims</string>
     <string name="policy_details">Policy Details</string>
     <string name="vvip_accident_details">VVIP Accident Details</string>
+    <string name="max_images_capturing">You can capture maximum of 10 images</string>
+    <string name="max_images_upload">You can select only 5 images to upload</string>
     
     
     <!-- Inquiries -->

@@ -1,5 +1,7 @@
 package com.ceylinco.ceylincocustomerapp.existingPolicy.accidents;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -20,6 +22,8 @@ import android.widget.TextView;
 
 import com.ceylinco.ceylincocustomerapp.R;
 import com.ceylinco.ceylincocustomerapp.models.ImageDetails;
+import com.ceylinco.ceylincocustomerapp.util.DetectNetwork;
+import com.ceylinco.ceylincocustomerapp.util.Notifications;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -35,8 +39,17 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
     private final ArrayList<ImageDetails> imageDetailses = new ArrayList<>();
     private static final int CAMERA_REQUEST = 2000;
     private static final String IMAGE_DIRECTORY_NAME = "ceylinco";
+    private static String jobId;
     private Uri fileUri;
     private ImageGalleryRecycleAdapter imageGalleryRecycleAdapter;
+    private String policyNumber;
+    private int imageCount = 0;
+    private int selectedCount = 0;
+    private static String vehicleNumber;
+    private final Notifications notifications = new Notifications();
+    private ProgressDialog progress;
+    private AlertDialog alertDialog;
+    private Context context;
 
 
     @Override
@@ -61,6 +74,14 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
     }
 
     private void initialize() {
+
+        policyNumber = getIntent().getStringExtra("POLICY");
+        vehicleNumber = getIntent().getStringExtra("VEHICLE");
+        jobId = "VIP_IMG_"+policyNumber+"_"+vehicleNumber;
+
+        context = ReportAccidentsActivity.this;
+        DetectNetwork.setmContext(context);
+
         Button addNewPhoto = (Button) findViewById(R.id.addNewPhoto);
         Button uploadPhotos = (Button) findViewById(R.id.upload);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.imgGallery);
@@ -69,7 +90,6 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         imageGalleryRecycleAdapter = new ImageGalleryRecycleAdapter(this,imageDetailses);
         recyclerView.setAdapter(imageGalleryRecycleAdapter);
-        Context con = this;
         addNewPhoto.setOnClickListener(this);
         uploadPhotos.setOnClickListener(this);
 
@@ -83,8 +103,16 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
             public void onLongClick(int position) {
                 if(imageDetailses.get(position).isChecked()){
                     imageDetailses.get(position).setChecked(false);
+                    selectedCount = selectedCount -1;
                 }else{
-                    imageDetailses.get(position).setChecked(true);
+                    if(selectedCount<5){
+                        imageDetailses.get(position).setChecked(true);
+                        selectedCount = selectedCount +1;
+                    }else{
+                        alertDialog = notifications.showGeneralDialog(context,getResources().getString(R.string.max_images_upload));
+                        alertDialog.show();
+                    }
+
                 }
                 imageGalleryRecycleAdapter.notifyDataSetChanged();
             }
@@ -95,9 +123,21 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.addNewPhoto){
-            captureImage();
-        }else if(v.getId()==R.id.upload){
+            if(imageCount<10){
+                captureImage();
+            }else{
+                alertDialog = notifications.showGeneralDialog(context,getResources().getString(R.string.max_images_capturing));
+                alertDialog.show();
+            }
 
+        }else if(v.getId()==R.id.upload){
+            for(int i=0;i<imageDetailses.size();i++){
+                if(imageDetailses.get(i).isChecked()){
+                    ArrayList<String> selectedImageList = new ArrayList<>();
+                    selectedImageList.add(imageDetailses.get(i).getImagePath());
+                    uploadImage(selectedImageList);
+                }
+            }
         }
     }
 
@@ -108,10 +148,12 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
 
             try {
                 imageDetails.setImagePath(fileUri.getPath());
-                imageDetails.setChecked(true);
+                imageDetails.setChecked(false);
 
                 imageDetailses.add(imageDetails);
                 imageGalleryRecycleAdapter.notifyDataSetChanged();
+
+                imageCount = imageCount +1;
 
             }catch (NullPointerException e){
                 e.printStackTrace();
@@ -143,7 +185,7 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
     private static File getOutputMediaFile(int type) {
 
         // External sdcard location
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),IMAGE_DIRECTORY_NAME);
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),IMAGE_DIRECTORY_NAME+"/"+jobId);
 
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists()) {
@@ -155,15 +197,12 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
         }
 
         // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String timeStamp = new SimpleDateFormat("yyyy_MM_dd_HHmmss", Locale.getDefault()).format(new Date());
         File mediaFile;
         if (type == 1) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "IMG_" + timeStamp + ".png");
-        } else if (type == 2) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "VID_" + timeStamp + ".mp4");
-        } else {
+                    + "IMG_" +vehicleNumber+"_"+ timeStamp + ".png");
+        }else {
             return null;
         }
 
@@ -218,5 +257,9 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
         public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
         }
+    }
+
+    private void uploadImage(ArrayList<String> selectedImageList){
+
     }
 }

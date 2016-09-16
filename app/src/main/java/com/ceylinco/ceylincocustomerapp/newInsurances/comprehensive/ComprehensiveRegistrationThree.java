@@ -198,7 +198,7 @@ public class ComprehensiveRegistrationThree extends AppCompatActivity implements
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-            firstRegistration.setText(dayOfMonth+"/"+monthOfYear+"/"+year);
+            firstRegistration.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
 
         }
     };
