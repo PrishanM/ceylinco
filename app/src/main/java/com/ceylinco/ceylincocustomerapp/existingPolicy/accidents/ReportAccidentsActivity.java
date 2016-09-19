@@ -3,7 +3,10 @@ package com.ceylinco.ceylincocustomerapp.existingPolicy.accidents;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -12,6 +15,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Base64;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -23,8 +27,10 @@ import android.widget.TextView;
 import com.ceylinco.ceylincocustomerapp.R;
 import com.ceylinco.ceylincocustomerapp.models.ImageDetails;
 import com.ceylinco.ceylincocustomerapp.util.DetectNetwork;
+import com.ceylinco.ceylincocustomerapp.util.JsonRequestManager;
 import com.ceylinco.ceylincocustomerapp.util.Notifications;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,6 +43,7 @@ import java.util.Locale;
 public class ReportAccidentsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final ArrayList<ImageDetails> imageDetailses = new ArrayList<>();
+    private ArrayList<String> selectedImageList = new ArrayList<>();
     private static final int CAMERA_REQUEST = 2000;
     private static final String IMAGE_DIRECTORY_NAME = "ceylinco";
     private static String jobId;
@@ -50,6 +57,7 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
     private ProgressDialog progress;
     private AlertDialog alertDialog;
     private Context context;
+    private int uploadPosition = 0;
 
 
     @Override
@@ -133,10 +141,15 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
         }else if(v.getId()==R.id.upload){
             for(int i=0;i<imageDetailses.size();i++){
                 if(imageDetailses.get(i).isChecked()){
-                    ArrayList<String> selectedImageList = new ArrayList<>();
                     selectedImageList.add(imageDetailses.get(i).getImagePath());
-                    uploadImage(selectedImageList);
                 }
+            }
+            if(selectedImageList.size()>0){
+                progress = new ProgressDialog(context);
+                progress.setMessage("Uploading 1 of " + selectedCount + " images");
+                progress.show();
+                progress.setCanceledOnTouchOutside(true);
+                uploadImage(uploadPosition);
             }
         }
     }
@@ -259,7 +272,63 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
         }
     }
 
-    private void uploadImage(ArrayList<String> selectedImageList){
+    private void uploadImage(int position){
 
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 8;
+        final Bitmap photo = BitmapFactory.decodeFile(selectedImageList.get(position),options);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        photo.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream .toByteArray();
+        String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        String[] parts = selectedImageList.get(position).split("/");
+        int size = parts.length;
+
+        JsonRequestManager.getInstance(this).uploadImage(getResources().getString(R.string.image_upload_url),encoded,jobId, parts[size-1], callback);
     }
+
+    /**
+     * Callback to handle image upload
+     */
+    private final JsonRequestManager.uploadImageRequest callback = new JsonRequestManager.uploadImageRequest() {
+        @Override
+        public void onSuccess(String response) {
+            if(progress!=null){
+                progress.dismiss();
+            }
+
+            if((uploadPosition+1)<selectedCount){
+                uploadPosition = uploadPosition +1;
+                progress = new ProgressDialog(context);
+                progress.setMessage("Uploading "+ (uploadPosition+1)+" of " + selectedCount + " images");
+                progress.show();
+                progress.setCanceledOnTouchOutside(true);
+                uploadImage(uploadPosition);
+            }else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Images uploaded successfully");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+
+            String APPLICATION_TAG = "IMAGE UPLOAD";
+
+
+        }
+
+        @Override
+        public void onError(String response) {
+            if(progress!=null){
+                progress.dismiss();
+            }
+            alertDialog = notifications.showGeneralDialog(context,response);
+            alertDialog.show();
+        }
+    };
 }

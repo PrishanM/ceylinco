@@ -148,5 +148,6 @@
     <string name="forgot_password_details_url">user_forgot_password_submit.aspx</string>
     <string name="get_perils_url">get_product_perils.aspx</string>
     <string name="create_user_url">user_registration_form_submit.aspx</string>
+    <string name="image_upload_url">http://www.ceyins.lk/vip/uploadImages.php</string>
 
 </resources>
