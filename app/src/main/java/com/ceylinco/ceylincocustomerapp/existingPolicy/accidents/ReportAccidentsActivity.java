@@ -103,12 +103,7 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
             @Override
-            public void onClick() {
-                Log.d("TAG","ON CLICK");
-            }
-
-            @Override
-            public void onLongClick(int position) {
+            public void onClick(View view, int position) {
                 if(imageDetailses.get(position).isChecked()){
                     imageDetailses.get(position).setChecked(false);
                     selectedCount = selectedCount -1;
@@ -123,6 +118,12 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
 
                 }
                 imageGalleryRecycleAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                Log.d("TAG","ON LONG CLICK");
             }
         }));
 
@@ -224,9 +225,9 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
 
     //ClickListener interface for images recycle view
     public interface ClickListener {
-        void onClick();
+        void onClick(View view, int position);
 
-        void onLongClick(int position);
+        void onLongClick(View view, int position);
     }
 
     public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
@@ -246,7 +247,7 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
                 public void onLongPress(MotionEvent e) {
                     View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
                     if (child != null && clickListener != null) {
-                        clickListener.onLongClick(recyclerView.getChildPosition(child));
+                        clickListener.onLongClick(child,recyclerView.getChildAdapterPosition(child));
                     }
                 }
             });
@@ -257,7 +258,7 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
 
             View child = rv.findChildViewUnder(e.getX(), e.getY());
             if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
-                //clickListener.onLongClick(child, rv.getChildPosition(child));
+                clickListener.onClick(child, rv.getChildAdapterPosition(child));
             }
             return false;
         }
@@ -278,13 +279,13 @@ public class ReportAccidentsActivity extends AppCompatActivity implements View.O
         options.inSampleSize = 8;
         final Bitmap photo = BitmapFactory.decodeFile(selectedImageList.get(position),options);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        photo.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        photo.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream .toByteArray();
         String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
         String[] parts = selectedImageList.get(position).split("/");
         int size = parts.length;
 
-        JsonRequestManager.getInstance(this).uploadImage(getResources().getString(R.string.image_upload_url),encoded,jobId, parts[size-1], callback);
+        JsonRequestManager.getInstance(this).uploadImage(getResources().getString(R.string.image_upload_url),encoded,jobId, parts[size-1].replace("png","jpg"), callback);
     }
 
     /**

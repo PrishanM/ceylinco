@@ -41,11 +41,11 @@ public class CallUsFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
         if(v.getId()==R.id.idHotLine){
-            callUs("tel:011256895");
+            callUs("tel:+94112393939");
         }else if(v.getId()==R.id.idHeadOffice){
-            callUs("tel:011289632");
+            callUs("tel:+94115702702");
         }else if(v.getId()==R.id.idVIP){
-            callUs("tel:0112897653");
+            callUs("tel:+94114705705");
         }
 
     }

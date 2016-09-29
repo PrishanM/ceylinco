@@ -15,7 +15,6 @@ import java.util.List;
  * Created by Prishan Maduka on 7/11/2016.
  */
 public class SplashActivity extends Activity {
-    private static int SPLASH_TIMEOUT_TIME = 3000;
     int cameraState = 0,locationServicesState=0,locationCoarseState=0,storageAccess=0,phoneState = 0;
     private static int REQUEST_CODE = 1100;
     private List<String> permissionList = new ArrayList<String>();

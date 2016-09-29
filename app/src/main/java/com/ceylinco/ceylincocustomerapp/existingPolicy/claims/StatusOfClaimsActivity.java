@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -192,6 +193,7 @@ public class StatusOfClaimsActivity extends AppCompatActivity {
                     TextView claimDate = (TextView)dialog.findViewById(R.id.txtClaimDate);
                     TextView approvedState = (TextView)dialog.findViewById(R.id.txtApproved);
                     TextView remark = (TextView)dialog.findViewById(R.id.txtRemark);
+                    remark.setMovementMethod(new ScrollingMovementMethod());
                     TextView contactTel = (TextView)dialog.findViewById(R.id.txtTel);
                     ImageView imgStatus = (ImageView)dialog.findViewById(R.id.imgApprovedStatus);
                     Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);

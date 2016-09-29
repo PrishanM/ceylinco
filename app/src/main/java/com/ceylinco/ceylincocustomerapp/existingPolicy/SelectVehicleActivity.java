@@ -11,11 +11,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ceylinco.ceylincocustomerapp.MainActivity;
 import com.ceylinco.ceylincocustomerapp.R;
 import com.ceylinco.ceylincocustomerapp.models.FormSubmitResponse;
 import com.ceylinco.ceylincocustomerapp.models.Policy;
@@ -198,5 +201,36 @@ public class SelectVehicleActivity extends AppCompatActivity implements View.OnC
         }
 
         return builder.create();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.action_logout){
+            alertDialog = notifications.logoutDialog(context);
+            alertDialog.show();
+            return true;
+        }else if(item.getItemId()==android.R.id.home){
+            backKeyPressed();
+            return true;
+        }else{
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        backKeyPressed();
+    }
+
+    private void backKeyPressed(){
+        Intent mainActivity = new Intent(context, MainActivity.class);
+        startActivity(mainActivity);
+        finish();
     }
 }
