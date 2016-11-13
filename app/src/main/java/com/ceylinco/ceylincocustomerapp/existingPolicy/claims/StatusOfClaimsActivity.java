@@ -30,6 +30,11 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -127,31 +132,36 @@ public class StatusOfClaimsActivity extends AppCompatActivity {
             String APPLICATION_TAG = "CLAIMS";
             try {
 
-                ObjectMapper mapper = new ObjectMapper();
+                JSONObject responseJsonObject = (JSONObject)new JSONTokener(response).nextValue();
+                String mainResultString = responseJsonObject.getString("results");
+                JSONObject resultJsonObject = (JSONObject)new JSONTokener(mainResultString).nextValue();
 
-                FormSubmitResponse claims = mapper.readValue(response, FormSubmitResponse.class);
-
-                if(claims.getResults().getStatus().equalsIgnoreCase("0")){
-                    alertDialog = notifications.showGeneralDialog(context,claims.getResults().getError().getText());
+                if(resultJsonObject.getString("status").equalsIgnoreCase("0")){
+                    alertDialog = notifications.showGeneralDialog(context,"Error occured");
                     alertDialog.show();
-                }else if(claims.getResults().getStatus().equalsIgnoreCase("1")){
-                    if(claims.getResults().getClaim().size()>0){
-                        claimsAdapter = new ClaimsAdapter(context,claims.getResults().getClaim());
-                        claimsList.setAdapter(claimsAdapter);
-                        list = claims.getResults().getClaim();
-                    }else {
-                        alertDialog = notifications.showGeneralDialog(context,"No data found");
-                        alertDialog.show();
-                    }
-                }
+                }else if(resultJsonObject.getString("status").equalsIgnoreCase("1")){
+                    String claimResults = resultJsonObject.getString("claim");
+                    if(new JSONTokener(claimResults).nextValue() instanceof JSONObject){
+                        JSONObject claimObject = (JSONObject)new JSONTokener(claimResults).nextValue();
+                        Claim claim = new Claim();
+                        claim.setRef(claimObject.getString("ref"));
+                        claim.setDate(claimObject.getString("date"));
+                        list.add(claim);
+                    }else if(new JSONTokener(claimResults).nextValue() instanceof JSONArray){
+                        JSONArray claimsArray = (JSONArray)new JSONTokener(claimResults).nextValue();
+                        for(int i=0;i<claimsArray.length();i++){
+                            JSONObject claimObject = (JSONObject)new JSONTokener(claimsArray.get(i).toString()).nextValue();
+                            Claim claim = new Claim();
+                            claim.setRef(claimObject.getString("ref"));
+                            claim.setDate(claimObject.getString("date"));
+                            list.add(claim);
 
-            }catch (JsonParseException e) {
-                e.printStackTrace();
-                Log.d(APPLICATION_TAG,e.getMessage());
-            } catch (JsonMappingException e) {
-                e.printStackTrace();
-                Log.d(APPLICATION_TAG,e.getMessage());
-            } catch (IOException e) {
+                        }
+                    }
+                    claimsAdapter = new ClaimsAdapter(context,list);
+                    claimsList.setAdapter(claimsAdapter);
+                }
+            } catch (JSONException e) {
                 e.printStackTrace();
                 Log.d(APPLICATION_TAG,e.getMessage());
             }

@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,17 +19,17 @@ import android.widget.TextView;
 
 import com.ceylinco.ceylincocustomerapp.MainActivity;
 import com.ceylinco.ceylincocustomerapp.R;
-import com.ceylinco.ceylincocustomerapp.models.FormSubmitResponse;
 import com.ceylinco.ceylincocustomerapp.models.Policy;
 import com.ceylinco.ceylincocustomerapp.util.AppController;
 import com.ceylinco.ceylincocustomerapp.util.DetectNetwork;
 import com.ceylinco.ceylincocustomerapp.util.JsonRequestManager;
 import com.ceylinco.ceylincocustomerapp.util.Notifications;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.IOException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,32 +126,40 @@ public class SelectVehicleActivity extends AppCompatActivity implements View.OnC
                 progress.dismiss();
             }
 
-            String APPLICATION_TAG = "SELECT POLICY";
             try {
 
-                ObjectMapper mapper = new ObjectMapper();
+                JSONObject responseJsonObject = (JSONObject)new JSONTokener(response).nextValue();
+                String mainResultString = responseJsonObject.getString("results");
+                JSONObject resultJsonObject = (JSONObject)new JSONTokener(mainResultString).nextValue();
 
-                FormSubmitResponse policies = mapper.readValue(response, FormSubmitResponse.class);
 
-                if(policies.getResults().getStatus().equalsIgnoreCase("0")){
-                    alertDialog = notifications.showGeneralDialog(context,policies.getResults().getError().getText());
+                if(resultJsonObject.getString("status").equalsIgnoreCase("0")){
+                    alertDialog = notifications.showGeneralDialog(context,"No policies");
                     alertDialog.show();
-                }else if(policies.getResults().getStatus().equalsIgnoreCase("1")){
-                    list = policies.getResults().getPolicy();
-                    for (int i=0;i<list.size();i++){
-                        policyList.add(list.get(i).getText());
+                }else if(resultJsonObject.getString("status").equalsIgnoreCase("1")){
+                    String policyResults = resultJsonObject.getString("policy");
+                    if(new JSONTokener(policyResults).nextValue() instanceof JSONObject){
+                        JSONObject policyObject = (JSONObject)new JSONTokener(policyResults).nextValue();
+                        Policy policy = new Policy();
+                        policy.setText(policyObject.getString("text"));
+                        policy.setVehicle(policyObject.getString("vehicle"));
+                        list.add(policy);
+                        policyList.add(policyObject.getString("text"));
+                    }else if(new JSONTokener(policyResults).nextValue() instanceof JSONArray){
+                        JSONArray policyArray = (JSONArray)new JSONTokener(policyResults).nextValue();
+                        for(int i=0;i<policyArray.length();i++){
+                            JSONObject policyObject = (JSONObject)new JSONTokener(policyArray.get(i).toString()).nextValue();
+                            Policy policy = new Policy();
+                            policy.setText(policyObject.getString("text"));
+                            policy.setVehicle(policyObject.getString("vehicle"));
+                            list.add(policy);
+                            policyList.add(policyObject.getString("text"));
+
+                        }
                     }
                 }
-
-            }catch (JsonParseException e) {
+            }catch (JSONException e) {
                 e.printStackTrace();
-                Log.d(APPLICATION_TAG,e.getMessage());
-            } catch (JsonMappingException e) {
-                e.printStackTrace();
-                Log.d(APPLICATION_TAG,e.getMessage());
-            } catch (IOException e) {
-                e.printStackTrace();
-                Log.d(APPLICATION_TAG,e.getMessage());
             }
 
         }
